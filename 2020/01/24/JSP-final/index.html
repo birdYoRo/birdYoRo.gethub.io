@@ -46,29 +46,35 @@
   };
 </script>
 
-  <meta name="description" content="一点浩然气，千里快哉风">
-<meta property="og:type" content="website">
-<meta property="og:title" content="YoRo99のblog">
-<meta property="og:url" content="https://birdyoro.github.io/index.html">
+  <meta name="description" content="我只摘录了我觉得在开发过程中有用或可能有用的内容，不是教程性质的博客，只是一个重点摘录考试考了里面的75分左右，嘻嘻嘻 HTTP协议的传输方式（居然会考这个，TAT，我只知道POST和GET） 请求和响应 Servlet最主要的作用就是处理客户端请求，并向客户端做出响应。针对Servlet的每次请求，Web服务器在调用service()方法前，都会创建两个对象：HttpServletRequest">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Web期末总结">
+<meta property="og:url" content="https://birdyoro.github.io/2020/01/24/JSP-final/index.html">
 <meta property="og:site_name" content="YoRo99のblog">
-<meta property="og:description" content="一点浩然气，千里快哉风">
+<meta property="og:description" content="我只摘录了我觉得在开发过程中有用或可能有用的内容，不是教程性质的博客，只是一个重点摘录考试考了里面的75分左右，嘻嘻嘻 HTTP协议的传输方式（居然会考这个，TAT，我只知道POST和GET） 请求和响应 Servlet最主要的作用就是处理客户端请求，并向客户端做出响应。针对Servlet的每次请求，Web服务器在调用service()方法前，都会创建两个对象：HttpServletRequest">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tZGdyYXBoLTEzMDExNjI1MDguY29zLmFwLXNoYW5naGFpLm15cWNsb3VkLmNvbS8yMDIwMDEyNDEyNDExNi5wbmc?x-oss-process=image/format,png">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tZGdyYXBoLTEzMDExNjI1MDguY29zLmFwLXNoYW5naGFpLm15cWNsb3VkLmNvbS8yMDIwMDEyNDEyNDczOS5wbmc?x-oss-process=image/format,png">
+<meta property="article:published_time" content="2020-01-24T04:58:35.000Z">
+<meta property="article:modified_time" content="2020-01-24T05:02:16.853Z">
 <meta property="article:author" content="YoRo">
+<meta property="article:tag" content="JSP">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tZGdyYXBoLTEzMDExNjI1MDguY29zLmFwLXNoYW5naGFpLm15cWNsb3VkLmNvbS8yMDIwMDEyNDEyNDExNi5wbmc?x-oss-process=image/format,png">
 
-<link rel="canonical" href="https://birdyoro.github.io/">
+<link rel="canonical" href="https://birdyoro.github.io/2020/01/24/JSP-final/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false
+    isHome: false,
+    isPost: true
   };
 </script>
 
-  <title>YoRo99のblog</title>
+  <title>Java Web期末总结 | YoRo99のblog</title>
   
 
 
@@ -179,10 +185,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://birdyoro.github.io/2020/01/24/JSP-final/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -196,8 +202,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/24/JSP-final/" class="post-title-link" itemprop="url">Java Web期末总结</a>
+          Java Web期末总结
         </h1>
 
         <div class="post-meta">
@@ -247,7 +252,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><del>我只摘录了我觉得在开发过程中有用或可能有用的内容，不是教程性质的博客，只是一个重点摘录</del><br><del>考试考了里面的75分左右，嘻嘻嘻</del></p>
+        <p><del>我只摘录了我觉得在开发过程中有用或可能有用的内容，不是教程性质的博客，只是一个重点摘录</del><br><del>考试考了里面的75分左右，嘻嘻嘻</del></p>
 <h1 id="HTTP协议的传输方式"><a href="#HTTP协议的传输方式" class="headerlink" title="HTTP协议的传输方式"></a>HTTP协议的传输方式</h1><p>（居然会考这个，TAT，我只知道POST和GET）<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tZGdyYXBoLTEzMDExNjI1MDguY29zLmFwLXNoYW5naGFpLm15cWNsb3VkLmNvbS8yMDIwMDEyNDEyNDExNi5wbmc?x-oss-process=image/format,png" alt=""></p>
 <h1 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h1><blockquote>
 <p>Servlet最主要的作用就是处理客户端请求，并向客户端做出响应。针对Servlet的每次请求，Web服务器在调用service()方法前，都会创建两个对象：HttpServletRequest和HttpServletResponse。其中HttpServletRequest用于封装HTTP请求消息，简称request对象；HttpServletResponse用于封装HTTP响应消息，简称response对象。<br>Web服务器只会创建一个实例对象，然而每次请求都会重新创建一个request对象和response对象。</p>
@@ -448,7 +453,6 @@
 <h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>显示模型中的数据，接收模型的数据更新通知，将用户操作传递给控制器</p>
 <h3 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h3><p>接收用户的操作，调用模型的业务处理方法，选择响应用户操作的视图</p>
 
-      
     </div>
 
     
@@ -456,228 +460,56 @@
     
 	<div>
 	  
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
 	</div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>YoRo
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://birdyoro.github.io/2020/01/24/JSP-final/" title="Java Web期末总结">https://birdyoro.github.io/2020/01/24/JSP-final/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/JSP/" rel="tag"> <i class="fa fa-tag"></i> # JSP</a>
+          </div>
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://birdyoro.github.io/2019/12/26/JSP-ks/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/author.jpg">
-      <meta itemprop="name" content="YoRo">
-      <meta itemprop="description" content="一点浩然气，千里快哉风">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YoRo99のblog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/26/JSP-ks/" class="post-title-link" itemprop="url">JSP 课程设计</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-26 15:03:49" itemprop="dateCreated datePublished" datetime="2019-12-26T15:03:49+08:00">2019-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-24 13:25:06" itemprop="dateModified" datetime="2020-01-24T13:25:06+08:00">2020-01-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E5%AD%A6%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index">
-                    <span itemprop="name">大学课程</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>11k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>写在前面：第一次课设花这么多功夫，写完自我感觉不错，但是仔细一想感觉写的有些东西真是又烂又烂又烂又烂，虽然可能上不了台面，但是作为课设结果还是绰绰有余的，所以记录一下，嘻嘻嘻♪（＾∀＾●）ﾉ</p>
-<p>ps:其实是记录了一下，课设中的一些重点</p>
-</blockquote>
-<h1 id="JSP课程设计"><a href="#JSP课程设计" class="headerlink" title="JSP课程设计"></a>JSP课程设计</h1><h2 id="课程设计题目"><a href="#课程设计题目" class="headerlink" title="课程设计题目"></a>课程设计题目</h2><p>面向课设的在线程序测试系统</p>
-<p>Course Design Oriented Online Judge（ <strong>CDO OJ</strong>）</p>
-<h2 id="系统功能"><a href="#系统功能" class="headerlink" title="系统功能"></a>系统功能</h2><ol>
-<li>登录注册</li>
-<li>查看题目列表</li>
-<li>搜索指定题目</li>
-<li>可以在线运行程序，支持的语言有C，C++，Java</li>
-<li>可以提交程序进行判断，判断情况有：Accepted，Wrong Answer，Runtime Error，Time Limit Exceeded，Compile Error</li>
-<li>编译错误时(TLE)，可以显示编译错误信息</li>
-<li>可以标记AC题目
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/12/26/JSP-ks/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/26/JSP-ks/" rel="prev" title="JSP 课程设计">
+      <i class="fa fa-chevron-left"></i> JSP 课程设计
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-	<div>
-	  
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://birdyoro.github.io/2019/12/26/hello-blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/author.jpg">
-      <meta itemprop="name" content="YoRo">
-      <meta itemprop="description" content="一点浩然气，千里快哉风">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YoRo99のblog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/26/hello-blog/" class="post-title-link" itemprop="url">Hello blog</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-26 10:27:26" itemprop="dateCreated datePublished" datetime="2019-12-26T10:27:26+08:00">2019-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-24 12:34:56" itemprop="dateModified" datetime="2020-01-24T12:34:56+08:00">2020-01-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index">
-                    <span itemprop="name">大学生活</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>92</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="我开始写blog了"><a href="#我开始写blog了" class="headerlink" title="我开始写blog了"></a>我开始写blog了</h1><p>哈哈哈哈</p>
-<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/%E9%BE%99%E7%8C%AB.jpg" alt="哈哈哈哈哈"></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Hello blog!"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-	<div>
-	  
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -728,6 +560,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP协议的传输方式"><span class="nav-number">1.</span> <span class="nav-text">HTTP协议的传输方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#请求和响应"><span class="nav-number">2.</span> <span class="nav-text">请求和响应</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Response对象的方法"><span class="nav-number">2.1.</span> <span class="nav-text">Response对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#getOutputStream-amp-getWriter-方法"><span class="nav-number">2.1.1.</span> <span class="nav-text">getOutputStream() &amp; getWriter()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setHeader用来设置响应头字段"><span class="nav-number">2.1.2.</span> <span class="nav-text">setHeader用来设置响应头字段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决中文乱码"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">解决中文乱码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#刷新跳转"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">刷新跳转</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求重定向"><span class="nav-number">2.1.3.</span> <span class="nav-text">请求重定向</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Request对象的方法"><span class="nav-number">2.2.</span> <span class="nav-text">Request对象的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用Referer请求头防止“盗链”（p130）"><span class="nav-number">2.2.1.</span> <span class="nav-text">利用Referer请求头防止“盗链”（p130）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取请求参数"><span class="nav-number">2.2.2.</span> <span class="nav-text">获取请求参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决请求中文乱码"><span class="nav-number">2.2.3.</span> <span class="nav-text">解决请求中文乱码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#public-void-setAttribute-java-lang-String-name-java-lang-Object-o"><span class="nav-number">2.2.4.</span> <span class="nav-text">public void setAttribute(java.lang.String name,java.lang.Object o);</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求转发"><span class="nav-number">2.2.5.</span> <span class="nav-text">请求转发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RequestDispatcher接口的方法"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">RequestDispatcher接口的方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求转发与重定向"><span class="nav-number">2.2.6.</span> <span class="nav-text">请求转发与重定向</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#会话"><span class="nav-number">3.</span> <span class="nav-text">会话</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie"><span class="nav-number">3.1.</span> <span class="nav-text">Cookie</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cookie的常用方法"><span class="nav-number">3.1.1.</span> <span class="nav-text">Cookie的常用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session"><span class="nav-number">3.2.</span> <span class="nav-text">Session</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HttpSession方法"><span class="nav-number">3.2.1.</span> <span class="nav-text">HttpSession方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSP"><span class="nav-number">4.</span> <span class="nav-text">JSP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP运行原理"><span class="nav-number">4.1.</span> <span class="nav-text">JSP运行原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP基本语法"><span class="nav-number">4.2.</span> <span class="nav-text">JSP基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP内置对象"><span class="nav-number">4.3.</span> <span class="nav-text">JSP内置对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP指令"><span class="nav-number">4.4.</span> <span class="nav-text">JSP指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#page指令"><span class="nav-number">4.4.1.</span> <span class="nav-text">page指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#include指令"><span class="nav-number">4.4.2.</span> <span class="nav-text">include指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#out对象"><span class="nav-number">4.4.3.</span> <span class="nav-text">out对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-jsp-forward-page-“relativeURL”-gt"><span class="nav-number">4.4.4.</span> <span class="nav-text">&lt;jsp:forward page&#x3D;“relativeURL”&gt;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaBean"><span class="nav-number">5.</span> <span class="nav-text">JavaBean</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EL表达式"><span class="nav-number">6.</span> <span class="nav-text">EL表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSTL"><span class="nav-number">7.</span> <span class="nav-text">JSTL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置变量"><span class="nav-number">7.0.1.</span> <span class="nav-text">设置变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#if语句"><span class="nav-number">7.0.2.</span> <span class="nav-text">if语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多重选择"><span class="nav-number">7.0.3.</span> <span class="nav-text">多重选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环"><span class="nav-number">7.0.4.</span> <span class="nav-text">循环</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Filter-过滤器"><span class="nav-number">8.</span> <span class="nav-text">Filter 过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Filter接口的方法"><span class="nav-number">8.1.</span> <span class="nav-text">Filter接口的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xml配置"><span class="nav-number">8.2.</span> <span class="nav-text">xml配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FIlter链"><span class="nav-number">8.2.1.</span> <span class="nav-text">FIlter链</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Listener监听器"><span class="nav-number">9.</span> <span class="nav-text">Listener监听器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JDBC"><span class="nav-number">10.</span> <span class="nav-text">JDBC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库操作过程："><span class="nav-number">10.1.</span> <span class="nav-text">数据库操作过程：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立数据库连接及释放连接"><span class="nav-number">10.1.1.</span> <span class="nav-text">建立数据库连接及释放连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#增"><span class="nav-number">10.1.2.</span> <span class="nav-text">增</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查"><span class="nav-number">10.1.3.</span> <span class="nav-text">查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删"><span class="nav-number">10.1.4.</span> <span class="nav-text">删</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改"><span class="nav-number">10.1.5.</span> <span class="nav-text">改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java获得时间，与MySQL-的DATE对应"><span class="nav-number">10.1.6.</span> <span class="nav-text">Java获得时间，与MySQL 的DATE对应</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库连接池"><span class="nav-number">11.</span> <span class="nav-text">数据库连接池</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、DBCP数据源"><span class="nav-number">11.1.</span> <span class="nav-text">1、DBCP数据源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、C3P0数据源"><span class="nav-number">11.2.</span> <span class="nav-text">2、C3P0数据源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#先配置c3p0-config-xml文件，放在src中"><span class="nav-number">11.2.1.</span> <span class="nav-text">先配置c3p0-config.xml文件，放在src中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立获得数据库连接的工具类C3p0Utils-java"><span class="nav-number">11.2.2.</span> <span class="nav-text">建立获得数据库连接的工具类C3p0Utils.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QueryRunner类执行SQL语句"><span class="nav-number">11.2.3.</span> <span class="nav-text">QueryRunner类执行SQL语句</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSP开发模型"><span class="nav-number">12.</span> <span class="nav-text">JSP开发模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP-Model1"><span class="nav-number">12.1.</span> <span class="nav-text">JSP Model1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP-Model2"><span class="nav-number">12.2.</span> <span class="nav-text">JSP Model2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC设计模式"><span class="nav-number">12.3.</span> <span class="nav-text">MVC设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">12.3.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图"><span class="nav-number">12.3.2.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制器"><span class="nav-number">12.3.3.</span> <span class="nav-text">控制器</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
