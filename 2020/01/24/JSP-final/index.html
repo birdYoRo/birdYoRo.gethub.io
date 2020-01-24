@@ -46,17 +46,17 @@
   };
 </script>
 
-  <meta name="description" content="我只摘录了我觉得在开发过程中有用或可能有用的内容，不是教程性质的博客，只是一个重点摘录考试考了里面的75分左右，嘻嘻嘻 HTTP协议的传输方式（居然会考这个，TAT，我只知道POST和GET） 请求和响应 Servlet最主要的作用就是处理客户端请求，并向客户端做出响应。针对Servlet的每次请求，Web服务器在调用service()方法前，都会创建两个对象：HttpServletRequest">
+  <meta name="description" content="我只摘录了我觉得在开发过程中有用或可能有用的内容，不是教程性质的博客，只是一个重点摘录考试考了里面的75分左右，嘻嘻嘻">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java Web期末总结">
 <meta property="og:url" content="https://birdyoro.github.io/2020/01/24/JSP-final/index.html">
 <meta property="og:site_name" content="YoRo99のblog">
-<meta property="og:description" content="我只摘录了我觉得在开发过程中有用或可能有用的内容，不是教程性质的博客，只是一个重点摘录考试考了里面的75分左右，嘻嘻嘻 HTTP协议的传输方式（居然会考这个，TAT，我只知道POST和GET） 请求和响应 Servlet最主要的作用就是处理客户端请求，并向客户端做出响应。针对Servlet的每次请求，Web服务器在调用service()方法前，都会创建两个对象：HttpServletRequest">
+<meta property="og:description" content="我只摘录了我觉得在开发过程中有用或可能有用的内容，不是教程性质的博客，只是一个重点摘录考试考了里面的75分左右，嘻嘻嘻">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tZGdyYXBoLTEzMDExNjI1MDguY29zLmFwLXNoYW5naGFpLm15cWNsb3VkLmNvbS8yMDIwMDEyNDEyNDExNi5wbmc?x-oss-process=image/format,png">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tZGdyYXBoLTEzMDExNjI1MDguY29zLmFwLXNoYW5naGFpLm15cWNsb3VkLmNvbS8yMDIwMDEyNDEyNDczOS5wbmc?x-oss-process=image/format,png">
 <meta property="article:published_time" content="2020-01-24T04:58:35.000Z">
-<meta property="article:modified_time" content="2020-01-24T05:02:16.853Z">
+<meta property="article:modified_time" content="2020-01-24T05:31:38.974Z">
 <meta property="article:author" content="YoRo">
 <meta property="article:tag" content="JSP">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-01-24 12:58:35 / 修改时间：13:02:16" itemprop="dateCreated datePublished" datetime="2020-01-24T12:58:35+08:00">2020-01-24</time>
+              <time title="创建时间：2020-01-24 12:58:35 / 修改时间：13:31:38" itemprop="dateCreated datePublished" datetime="2020-01-24T12:58:35+08:00">2020-01-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,7 +252,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><del>我只摘录了我觉得在开发过程中有用或可能有用的内容，不是教程性质的博客，只是一个重点摘录</del><br><del>考试考了里面的75分左右，嘻嘻嘻</del></p>
+        <p><del>我只摘录了我觉得在开发过程中有用或可能有用的内容，不是教程性质的博客，只是一个重点摘录</del><br><del>考试考了里面的75分左右，嘻嘻嘻</del><a id="more"></a></p>
 <h1 id="HTTP协议的传输方式"><a href="#HTTP协议的传输方式" class="headerlink" title="HTTP协议的传输方式"></a>HTTP协议的传输方式</h1><p>（居然会考这个，TAT，我只知道POST和GET）<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tZGdyYXBoLTEzMDExNjI1MDguY29zLmFwLXNoYW5naGFpLm15cWNsb3VkLmNvbS8yMDIwMDEyNDEyNDExNi5wbmc?x-oss-process=image/format,png" alt=""></p>
 <h1 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h1><blockquote>
 <p>Servlet最主要的作用就是处理客户端请求，并向客户端做出响应。针对Servlet的每次请求，Web服务器在调用service()方法前，都会创建两个对象：HttpServletRequest和HttpServletResponse。其中HttpServletRequest用于封装HTTP请求消息，简称request对象；HttpServletResponse用于封装HTTP响应消息，简称response对象。<br>Web服务器只会创建一个实例对象，然而每次请求都会重新创建一个request对象和response对象。</p>
@@ -261,8 +261,8 @@
 <h2 id="Response对象的方法"><a href="#Response对象的方法" class="headerlink" title="Response对象的方法"></a>Response对象的方法</h2><h3 id="getOutputStream-amp-getWriter-方法"><a href="#getOutputStream-amp-getWriter-方法" class="headerlink" title="getOutputStream() &amp; getWriter()方法"></a>getOutputStream() &amp; getWriter()方法</h3><p>getOutputStream返回OutputStream对象以字节流（二进制）输出<br>getWriter返回PrintWriter以字符输出</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String data=“itcast”;</span><br><span class="line">OutputStream out=response.getOutputStream();</span><br><span class="line">out.write(data.getBytes());</span><br><span class="line">PrintWriter print=response.getWriter();</span><br><span class="line">print.write(data);</span><br></pre></td></tr></table></figure>
 
-<p>==getOutputStream和getWrite不能同时使用，否则会发生IllegalStateException异常==</p>
-<h3 id="setHeader用来设置响应头字段"><a href="#setHeader用来设置响应头字段" class="headerlink" title="setHeader用来设置响应头字段"></a>setHeader用来设置响应头字段</h3><h4 id="解决中文乱码"><a href="#解决中文乱码" class="headerlink" title="解决中文乱码"></a>解决中文乱码</h4><p>response对象的字符输出采用==ISO-8859-1==编码<br>在doGet或doPost或Service最前端加</p>
+<p><strong>getOutputStream和getWrite不能同时使用，否则会发生IllegalStateException异常</strong></p>
+<h3 id="setHeader用来设置响应头字段"><a href="#setHeader用来设置响应头字段" class="headerlink" title="setHeader用来设置响应头字段"></a>setHeader用来设置响应头字段</h3><h4 id="解决中文乱码"><a href="#解决中文乱码" class="headerlink" title="解决中文乱码"></a>解决中文乱码</h4><p>response对象的字符输出采用<strong>ISO-8859-1</strong>编码<br>在doGet或doPost或Service最前端加</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">response.setCharacterEncoding(“utf-<span class="number">8</span>”);</span><br><span class="line">response.setHeader(“Content-Type”,”text/html;charset=utf-<span class="number">8</span>”);</span><br></pre></td></tr></table></figure>
 
 <p>or</p>
@@ -289,7 +289,7 @@
 
 <p>浏览器中直接输入DownManagerServlet的URL，第一次访问时不会有Referer请求头，再点击download会显示结果。<br><strong>链接</strong>才会产生请求头，就是说输入URL访问不会产生Referer！</p>
 <h3 id="获取请求参数"><a href="#获取请求参数" class="headerlink" title="获取请求参数"></a>获取请求参数</h3><p><strong>当网页中表单（form）提交时</strong><br><code>String getParameter(String name)</code>获取指定名称的参数值<br><code>String[] getParameterValues(String name)</code>获取指定名称的参数列表（比如多选按钮传来的值）</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//html部分</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“text”</span> <span class="attr">name</span>=<span class="string">“username”/</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“checkbox”</span> <span class="attr">name</span>=<span class="string">“hobby”</span> <span class="attr">value</span>=<span class="string">“sing”</span>&gt;</span>唱歌</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“checkbox”</span> <span class="attr">name</span>=<span class="string">“hobby”</span> <span class="attr">value</span>=<span class="string">“dance”</span>&gt;</span>跳舞</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“checkbox”</span> <span class="attr">name</span>=<span class="string">“hobby”</span> <span class="attr">value</span>=<span class="string">“football”</span>&gt;</span>足球</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//html部分</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“text”</span> <span class="attr">name</span>=<span class="string">“username”/</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“checkbox”</span> <span class="attr">name</span>=<span class="string">“hobby”</span> <span class="attr">value</span>=<span class="string">“sing”</span>&gt;</span>唱歌</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“checkbox”</span> <span class="attr">name</span>=<span class="string">“hobby”</span> <span class="attr">value</span>=<span class="string">“dance”</span>&gt;</span>跳舞</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“checkbox”</span> <span class="attr">name</span>=<span class="string">“hobby”</span> <span class="attr">value</span>=<span class="string">“rap”</span>&gt;</span>Rap</span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“checkbox”</span> <span class="attr">name</span>=<span class="string">“hobby”</span> <span class="attr">value</span>=<span class="string">“basketball”</span>&gt;</span>篮球</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//servlet部分</span></span><br><span class="line">String name=request.getParameter(“username”);</span><br><span class="line">String[] hobbys=request.getParameterValues(“hobby”);</span><br></pre></td></tr></table></figure>
 
@@ -344,7 +344,7 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User  user=(User)request.getSession().getAttribute(“user”);</span><br></pre></td></tr></table></figure>
 
-<p>  ==session的信息在整个Web中共享==</p>
+<p>  <strong>session的信息在整个Web中共享</strong></p>
 <h1 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h1><blockquote>
 <p>JSP全名是Java Server Pages，它是建立在Servlet范围之上的动态网页开发技术。在JSP文件中，HTML代码与Java代码共同存在，其中，HTML代码用来实现网页中静态内容的显示，Java代码用来实现网页中动态内容的显示。扩展名为.jsp。</p>
 </blockquote>
