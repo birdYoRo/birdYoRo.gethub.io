@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/lufei.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('https://birdYoRo.github.io').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="树对考研数据结构中树进行总结，会加入一些做PAT时的心得和代码，参考的书是严蔚敏的《数据结构》，完善她的伪代码，慢慢写吧可能得整一个星期；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-树">
+<meta property="og:url" content="https://birdyoro.github.io/2020/01/27/tree/index.html">
+<meta property="og:site_name" content="YoRo99のblog">
+<meta property="og:description" content="树对考研数据结构中树进行总结，会加入一些做PAT时的心得和代码，参考的书是严蔚敏的《数据结构》，完善她的伪代码，慢慢写吧可能得整一个星期；">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20200127193435.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/ba8ecd76181fcefd1582f61fed8bd8d.jpg">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/674cdeb48138bb3cfabaef3676a0bd5.jpg">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/5520a247fbc6471130d437f75f51b28.jpg">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/5222a8ed39c07bf72faa5fff21d970f.jpg">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/Huffman_res.png">
+<meta property="article:published_time" content="2020-01-27T13:06:48.000Z">
+<meta property="article:modified_time" content="2020-01-27T13:10:20.505Z">
+<meta property="article:author" content="YoRo">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20200127193435.png">
+
+<link rel="canonical" href="https://birdyoro.github.io/2020/01/27/tree/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>数据结构-树 | YoRo99のblog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YoRo99のblog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">思绪像风，停留在此</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">5</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://birdyoro.github.io/2020/01/27/tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="YoRo">
+      <meta itemprop="description" content="一点浩然气，千里快哉风">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YoRo99のblog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构-树
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-01-27 21:06:48 / 修改时间：21:10:20" itemprop="dateCreated datePublished" datetime="2020-01-27T21:06:48+08:00">2020-01-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><p>对考研数据结构中树进行总结，会加入一些做PAT时的心得和代码，参考的书是严蔚敏的《数据结构》，完善她的伪代码，慢慢写吧可能得整一个星期；</p>
+<a id="more"></a>
+
+<h2 id="（一）树的基本概念"><a href="#（一）树的基本概念" class="headerlink" title="（一）树的基本概念"></a>（一）树的基本概念</h2><h2 id="（二）二叉树"><a href="#（二）二叉树" class="headerlink" title="（二）二叉树"></a>（二）二叉树</h2><h3 id="1-二叉树的定义及其主要特征"><a href="#1-二叉树的定义及其主要特征" class="headerlink" title="1.二叉树的定义及其主要特征"></a>1.二叉树的定义及其主要特征</h3><h3 id="2-二叉树的顺序存储结构和链式存储结构"><a href="#2-二叉树的顺序存储结构和链式存储结构" class="headerlink" title="2.二叉树的顺序存储结构和链式存储结构"></a>2.二叉树的顺序存储结构和链式存储结构</h3><h3 id="3-二叉树的遍历"><a href="#3-二叉树的遍历" class="headerlink" title="3.二叉树的遍历"></a>3.二叉树的遍历</h3><h3 id="4-线索二叉树的基本概念和构造"><a href="#4-线索二叉树的基本概念和构造" class="headerlink" title="4.线索二叉树的基本概念和构造"></a>4.线索二叉树的基本概念和构造</h3><h2 id="（三）树、森林"><a href="#（三）树、森林" class="headerlink" title="（三）树、森林"></a>（三）树、森林</h2><h3 id="1-树的存储结构"><a href="#1-树的存储结构" class="headerlink" title="1.树的存储结构"></a>1.树的存储结构</h3><h3 id="2-森林与二叉树树的转换"><a href="#2-森林与二叉树树的转换" class="headerlink" title="2.森林与二叉树树的转换"></a>2.森林与二叉树树的转换</h3><h3 id="3-树和森林的遍历"><a href="#3-树和森林的遍历" class="headerlink" title="3.树和森林的遍历"></a>3.树和森林的遍历</h3><h2 id="（四）树与二叉树的应用"><a href="#（四）树与二叉树的应用" class="headerlink" title="（四）树与二叉树的应用"></a>（四）树与二叉树的应用</h2><h3 id="1-二叉排序树"><a href="#1-二叉排序树" class="headerlink" title="1.二叉排序树"></a>1.二叉排序树</h3><h3 id="2-平衡二叉树"><a href="#2-平衡二叉树" class="headerlink" title="2.平衡二叉树"></a>2.平衡二叉树</h3><h3 id="3-哈夫曼（Huffman）树和哈夫曼编码"><a href="#3-哈夫曼（Huffman）树和哈夫曼编码" class="headerlink" title="3.哈夫曼（Huffman）树和哈夫曼编码"></a>3.哈夫曼（Huffman）树和哈夫曼编码</h3><p>哈夫曼树（赫夫曼树），又称<strong>最优树（最优二叉树）</strong>，是一类带权路径长度最短的树；</p>
+<p><strong>路径长度</strong>：树中一个节点到另一个节点路径上的分支数，（<em>完全二叉树</em>就是这种路径长度最短的二叉树）；</p>
+<p><strong>节点的带权路径长度：</strong>从该节点到树根之间的路径长度与节点上权的乘积；</p>
+<p><strong>树的带权路径长度：</strong>树中所有<strong>叶子</strong>节点的带权路径长度之和；</p>
+<ul>
+<li>记作<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20200127193435.png" alt=""></li>
+</ul>
+<blockquote>
+<p><strong>构造赫夫曼树的算法描述：</strong><br> 1.根据给定的n个权值{w1,w2,…,wn}构成n棵二叉树（只含一个节点）的集合F= {T1，T2，…,Tn}.,其中每颗二叉树Ti中只有一个带权为Wi的根节点，其左右子树为空。<br> 2.在F中选取两颗根节点的权值最小的树作为左右子树构造一颗新的二叉树，并且新的二叉树的根节点的权值为左右子树根节点上的权值之和。<br> 3.在F中删除这两棵树，将新的到的二叉树加入F中。<br> 4.重复二三，直到F中只剩下一棵树为止，这就是赫夫曼树。</p>
+</blockquote>
+<h4 id="作用一、用于最佳判定算法"><a href="#作用一、用于最佳判定算法" class="headerlink" title="作用一、用于最佳判定算法"></a>作用一、用于最佳判定算法</h4><p>例：将一个百分制转换为五级分制（严为蔚敏p144）：</p>
+<p>最直接简单的for循环形式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a&lt;<span class="number">60</span>)res=<span class="string">"bad"</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(a&lt;<span class="number">70</span>)res=<span class="string">"pass"</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(a&lt;<span class="number">80</span>)res=<span class="string">"general"</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(a&lt;<span class="number">90</span>)res=<span class="string">"good"</span>;</span><br><span class="line"><span class="keyword">else</span> res=<span class="string">"excellent"</span>;</span><br></pre></td></tr></table></figure>
+
+<p>但是这个算法可以发现在输入量非常大时，如果&gt;90的成绩比重较大的话，那么比较次数就会非常多；如果&lt;60的成绩比重较大的话，那么比较次数就会比较理想，其本身形成的判定树如（a）所示：</p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/ba8ecd76181fcefd1582f61fed8bd8d.jpg" style="zoom:33%;" />
+
+<p>那么对于预估比例系数如下的成绩序列可以做出优化</p>
+<table>
+<thead>
+<tr>
+<th>分数</th>
+<th>0—59</th>
+<th>60—69</th>
+<th>70—79</th>
+<th>80—89</th>
+<th>90—100</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>比例数</td>
+<td>0.05</td>
+<td>0.15</td>
+<td>0.40</td>
+<td>0.30</td>
+<td>0.10</td>
+</tr>
+</tbody></table>
+<p>通过上述成绩分布，可以构建赫夫曼树的过程构建赫夫曼树（b）如下：</p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/674cdeb48138bb3cfabaef3676a0bd5.jpg" style="zoom: 33%;" />
+
+<p>但是可以发现，在此赫夫曼树中有三个判定节点需要作两次判断，因此可以进一步优化：</p>
+<p>对于单向的比较区间，不难想到两个比较区间可以确定一个成绩等级，因此为了得到赫夫曼树（c），所互为父子的节点必须为相邻区间，而且每选定一个节点应该可以确定一个区间（因为其作为叶子节点）：（1）0-59这个区间的权值最小，并且&lt;60可以确定区间，所以先取出构成节点&lt;60；(2)其次90-100这两个相邻区间的权值之和最小，所以新结点为&lt;90，但是&lt;90与&lt;60并不是相邻区间，所以单独形成一个叶子节点；（3）接着在选择60-69，因为其与a&lt;60相邻所以作为其父节点；反复合并得到下图：</p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/5520a247fbc6471130d437f75f51b28.jpg" style="zoom:33%;" />
+
+<p>对应代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a&lt;<span class="number">80</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(a&lt;<span class="number">70</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(a&lt;<span class="number">60</span>) b=<span class="string">"bad"</span>;</span><br><span class="line">		<span class="keyword">else</span> b=<span class="string">"pass"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> b=<span class="string">"general"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(a&lt;<span class="number">90</span>)b=<span class="string">"good"</span>;</span><br><span class="line">	<span class="keyword">else</span> b=<span class="string">"excellent"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="作用二、哈夫曼编码解码"><a href="#作用二、哈夫曼编码解码" class="headerlink" title="作用二、哈夫曼编码解码"></a>作用二、哈夫曼编码解码</h4><p>进行快速远距离通信的电报，通过哈夫曼编码可以增加安全性：</p>
+<p>因为传输报文需要快速并且可以高效的编码译码：所以编码的长度应该尽可能短，在对于字符串编码时，会有一些字符是高频出现的比如‘a’或者‘s’,所以在哈夫曼编码中其对应的权值就会比较大，权值越大就越接近根节点，因此对应的编码值就会比较短；</p>
+<p>哈夫曼编码的特点：任一个字符的编码都不是另一个字符v的w编码的前缀，称为<strong>前缀编码</strong></p>
+<p>哈夫曼树的特点：</p>
+<ul>
+<li>哈夫曼树中没有度为一的节点（这类树又称为严格的（strict）（或正则的）二叉树），因此对于有n个叶子节点的哈夫曼树，共有<strong>2n-1</strong>个节点！</li>
+</ul>
+<p>先假设在日常中电文的8个字符的频率统计如下表所示：（严蔚敏p148）</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>s</th>
+<th>t</th>
+<th>u</th>
+<th>v</th>
+<th>w</th>
+<th>x</th>
+<th>y</th>
+<th>z</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>占比</td>
+<td>0.05</td>
+<td>0.29</td>
+<td>0.07</td>
+<td>0.08</td>
+<td>0.14</td>
+<td>0.23</td>
+<td>0.03</td>
+<td>0.11</td>
+</tr>
+</tbody></table>
+<p>得到对应的哈夫曼树如下（和书里的不同，这是根据下面代码画的树）：</p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/5222a8ed39c07bf72faa5fff21d970f.jpg" style="zoom: 50%;" />
+
+
+
+<p>哈夫曼树结构体：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> weight;  <span class="comment">//节点权值 </span></span><br><span class="line">	<span class="keyword">char</span> v; <span class="comment">//对应对象值 </span></span><br><span class="line">	<span class="keyword">int</span> p,l,r; <span class="comment">// 双亲，左孩子，右孩子 	</span></span><br><span class="line">&#125;HTNode ,* HuffmanTree;</span><br></pre></td></tr></table></figure>
+
+<p>构建哈夫曼树</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreateHuffmanTree</span><span class="params">(HuffmanTree &amp;HT,<span class="keyword">const</span> <span class="keyword">int</span> *w,<span class="keyword">const</span> <span class="keyword">char</span> *v,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,s1,s2;</span><br><span class="line">	<span class="keyword">if</span>(n&lt;=<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	<span class="keyword">int</span> m=<span class="number">2</span>*n<span class="number">-1</span>;</span><br><span class="line">	HT=(HuffmanTree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(HTNode)*(m+<span class="number">1</span>));  <span class="comment">//不使用0号单元 </span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		HT[i]=&#123;w[i],v[i],<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;  <span class="comment">//好像是C++11的赋值方法	</span></span><br><span class="line">	<span class="keyword">for</span>(;i&lt;=m;i++)</span><br><span class="line">		HT[i]=&#123;<span class="number">0</span>,<span class="string">' '</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">for</span>(i=n+<span class="number">1</span>;i&lt;=m;i++)<span class="comment">//建赫夫曼树</span></span><br><span class="line">	&#123;   <span class="comment">//从第[1,i-1]中筛取权值最小的两个节点s1、s2，选取的节点的父节点的weight应该为0！</span></span><br><span class="line">		Select(HT,i<span class="number">-1</span>,s1,s2);<span class="comment">//i-1!!!</span></span><br><span class="line">		HT[i].weight=HT[s1].weight+HT[s2].weight;</span><br><span class="line">		HT[i].l=s1,HT[i].r=s2;</span><br><span class="line">		HT[s1].p=i;</span><br><span class="line">		HT[s2].p=i; </span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从叶子节点到根节点获取哈夫曼编码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//编码规则：左子树0，右子树1 </span></span><br><span class="line"><span class="function">HuffmanCode <span class="title">CreateHuffmanCode_1</span><span class="params">(<span class="keyword">const</span> HuffmanTree &amp;HT,<span class="keyword">const</span> <span class="keyword">char</span> *arr,<span class="keyword">int</span> n)</span><span class="comment">//从叶子节点向根逆向编码 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HuffmanCode res=<span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span>(HT==<span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	res=(<span class="keyword">char</span> **)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>*)*(n+<span class="number">1</span>));<span class="comment">//分配n个字符编码的头指针向量 </span></span><br><span class="line">	<span class="keyword">char</span> * marr=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*n); <span class="comment">//分配编码空间 </span></span><br><span class="line">	marr[n<span class="number">-1</span>]=<span class="string">'\0'</span>;  <span class="comment">//编码结束位置 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> start=n<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">int</span> j,mp;</span><br><span class="line">		<span class="keyword">for</span>(j=i;HT[j].p!=<span class="number">0</span>;j=HT[j].p)</span><br><span class="line">		&#123;</span><br><span class="line">			mp=HT[j].p;</span><br><span class="line">			<span class="keyword">if</span>(HT[mp].l==j)</span><br><span class="line">				marr[--start]=<span class="string">'0'</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				marr[--start]=<span class="string">'1'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		res[i]=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*(n-start+<span class="number">1</span>));</span><br><span class="line">		<span class="built_in">strcpy</span>(&amp;(res[i][<span class="number">1</span>]),&amp;marr[start]);</span><br><span class="line">		res[i][<span class="number">0</span>]=arr[i];  <span class="comment">//第0个位置放编码对象 </span></span><br><span class="line">	&#125; </span><br><span class="line">	<span class="built_in">free</span>(marr);<span class="comment">//不要忘记释放在堆上开辟的空间 </span></span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从根节点到叶子节点非递归形式获得哈夫曼编码，和书上的不太一样，不过思路是一样的。我用一个vis数组来判断节点遍历状态，但是如果是书上的代码，一定不要忘记在使用HT本身记录状态时<strong>还原为原状态！</strong>（倒数第三行的<code>HT[p].weight=0</code>），不然会影响下一次的编码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HuffmanCode <span class="title">CreateHuffmanCode_2</span><span class="params">(<span class="keyword">const</span> HuffmanTree &amp;HT,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HuffmanCode res=<span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span>(HT==<span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	res=(HuffmanCode)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>*)*(n+<span class="number">1</span>));</span><br><span class="line">	<span class="keyword">int</span> i,len=<span class="number">0</span>,m=<span class="number">2</span>*n<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">char</span> * marr=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*(n+<span class="number">1</span>));</span><br><span class="line">	<span class="keyword">int</span> * vis=(<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*(m+<span class="number">1</span>));  <span class="comment">//0表示节点为遍历，1表示节点遍历了左子树，2表示节点遍历了右子树 </span></span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*(m+<span class="number">1</span>));  <span class="comment">//指针不能直接sizeof(vis) </span></span><br><span class="line">	<span class="keyword">int</span> p=m; </span><br><span class="line">	<span class="keyword">while</span>(p)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="comment">//	printf("p=%d\n",p);</span></span><br><span class="line">		<span class="keyword">if</span>(!vis[p])</span><br><span class="line">		&#123;</span><br><span class="line">			vis[p]=<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(HT[p].l!=<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				p=HT[p].l;</span><br><span class="line">				marr[len++]=<span class="string">'0'</span>;</span><br><span class="line">			&#125; </span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(HT[p].r==<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				res[p]=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*(len+<span class="number">2</span>)); <span class="comment">//'/0'和对象值</span></span><br><span class="line">				res[p][<span class="number">0</span>]=HT[p].v;</span><br><span class="line">				marr[len]=<span class="string">'\0'</span>;</span><br><span class="line">				<span class="built_in">strcpy</span>(&amp;(res[p][<span class="number">1</span>]),marr); </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(vis[p]==<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			vis[p]=<span class="number">2</span>;</span><br><span class="line">			<span class="keyword">if</span>(HT[p].r!=<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				p=HT[p].r;</span><br><span class="line">				marr[len++]=<span class="string">'1'</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> </span><br><span class="line">		&#123;</span><br><span class="line">			p=HT[p].p;</span><br><span class="line">			len--;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对字符串进行哈夫曼编码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> * <span class="title">Encoding</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *arr,<span class="keyword">const</span> HuffmanCode HC,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">char</span> *res=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*n*<span class="built_in">strlen</span>(arr));<span class="comment">//单个字符的最大编码长度不超过n </span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="built_in">strlen</span>(arr);i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[i]==HC[j][<span class="number">0</span>])</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">strcat</span>(res,&amp;(HC[j][<span class="number">1</span>]));</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对字符串进行哈夫曼解码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> * <span class="title">Decoding</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *arr,<span class="keyword">const</span> HuffmanCode HC,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j,k,num=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">char</span> *res=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*<span class="built_in">strlen</span>(arr));<span class="comment">//待解码字符串的长度肯定大于原字符串 </span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="built_in">strlen</span>(arr);)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> len=<span class="built_in">strlen</span>(&amp;(HC[j][<span class="number">1</span>]));</span><br><span class="line">			<span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;len;k++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(HC[j][<span class="number">1</span>+k]!=arr[i+k]||i&gt;=<span class="built_in">strlen</span>(arr))</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(k==len)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		res[num++]=HC[j][<span class="number">0</span>];</span><br><span class="line">		i+=<span class="built_in">strlen</span>(&amp;(HC[j][<span class="number">1</span>]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完整代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> weight;  <span class="comment">//节点权值 </span></span><br><span class="line">	<span class="keyword">char</span> v; <span class="comment">//对应对象值 </span></span><br><span class="line">	<span class="keyword">int</span> p,l,r; <span class="comment">// 双亲，左孩子，右孩子 	</span></span><br><span class="line">&#125;HTNode ,* HuffmanTree;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> * *HuffmanCode;<span class="comment">//赫夫曼编码的结果 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">c_swap</span><span class="params">(<span class="keyword">int</span> &amp;a,<span class="keyword">int</span> &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> m=a;</span><br><span class="line">	a=b;</span><br><span class="line">	b=m;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Select</span><span class="params">(<span class="keyword">const</span> HuffmanTree &amp;HT,<span class="keyword">int</span> d,<span class="keyword">int</span> &amp;s1,<span class="keyword">int</span> &amp;s2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	s1=<span class="number">0</span>,s2=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=d;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(HT[i].p==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(!s1)</span><br><span class="line">				s1=i;</span><br><span class="line">			<span class="keyword">else</span> </span><br><span class="line">				s2=i;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(s1&amp;&amp;s2)</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(HT[s1].weight&lt;HT[s2].weight)</span><br><span class="line">		c_swap(s1,s2);</span><br><span class="line">	<span class="keyword">for</span>(i++;i&lt;=d;i++)  <span class="comment">//要先i++，否则会重复计算左右节点 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(HT[i].p!=<span class="number">0</span>)</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">if</span>(HT[i].weight&lt;HT[s1].weight)</span><br><span class="line">		&#123;</span><br><span class="line">			s1=i;</span><br><span class="line">			<span class="keyword">if</span>(HT[s1].weight&lt;HT[s2].weight)</span><br><span class="line">				c_swap(s1,s2);</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreateHuffmanTree</span><span class="params">(HuffmanTree &amp;HT,<span class="keyword">const</span> <span class="keyword">int</span> *w,<span class="keyword">const</span> <span class="keyword">char</span> *v,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,s1,s2;</span><br><span class="line">	<span class="keyword">if</span>(n&lt;=<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	<span class="keyword">int</span> m=<span class="number">2</span>*n<span class="number">-1</span>;</span><br><span class="line">	HT=(HuffmanTree)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(HTNode)*(m+<span class="number">1</span>));  <span class="comment">//不使用0号单元 </span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		HT[i]=&#123;w[i],v[i],<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;  <span class="comment">//好像是C++11的赋值方法	</span></span><br><span class="line">	<span class="keyword">for</span>(;i&lt;=m;i++)</span><br><span class="line">		HT[i]=&#123;<span class="number">0</span>,<span class="string">' '</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">for</span>(i=n+<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		Select(HT,i<span class="number">-1</span>,s1,s2);<span class="comment">//i-1!!!</span></span><br><span class="line">		HT[i].weight=HT[s1].weight+HT[s2].weight;</span><br><span class="line">		HT[i].l=s1,HT[i].r=s2;</span><br><span class="line">		HT[s1].p=i;</span><br><span class="line">		HT[s2].p=i; </span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//编码规则：左子树0，右子树1 </span></span><br><span class="line"><span class="function">HuffmanCode <span class="title">CreateHuffmanCode_1</span><span class="params">(<span class="keyword">const</span> HuffmanTree &amp;HT,<span class="keyword">const</span> <span class="keyword">char</span> *arr,<span class="keyword">int</span> n)</span><span class="comment">//从叶子节点向根逆向编码 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HuffmanCode res=<span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span>(HT==<span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	res=(<span class="keyword">char</span> **)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>*)*(n+<span class="number">1</span>));</span><br><span class="line">	<span class="keyword">char</span> * marr=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*n); </span><br><span class="line">	marr[n<span class="number">-1</span>]=<span class="string">'\0'</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> start=n<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">int</span> j,mp;</span><br><span class="line">		<span class="keyword">for</span>(j=i;HT[j].p!=<span class="number">0</span>;j=HT[j].p)</span><br><span class="line">		&#123;</span><br><span class="line">			mp=HT[j].p;</span><br><span class="line">			<span class="keyword">if</span>(HT[mp].l==j)</span><br><span class="line">				marr[--start]=<span class="string">'0'</span>;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				marr[--start]=<span class="string">'1'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		res[i]=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*(n-start+<span class="number">1</span>));</span><br><span class="line">		<span class="built_in">strcpy</span>(&amp;(res[i][<span class="number">1</span>]),&amp;marr[start]);</span><br><span class="line">		res[i][<span class="number">0</span>]=arr[i];  <span class="comment">//第0个位置放编码对象 </span></span><br><span class="line">	&#125; </span><br><span class="line">	<span class="built_in">free</span>(marr);<span class="comment">//不要忘记释放在堆上开辟的空间 </span></span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">HuffmanCode <span class="title">CreateHuffmanCode_2</span><span class="params">(<span class="keyword">const</span> HuffmanTree &amp;HT,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HuffmanCode res=<span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span>(HT==<span class="literal">NULL</span>)</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	res=(HuffmanCode)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>*)*(n+<span class="number">1</span>));</span><br><span class="line">	<span class="keyword">int</span> i,len=<span class="number">0</span>,m=<span class="number">2</span>*n<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">char</span> * marr=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*(n+<span class="number">1</span>));</span><br><span class="line">	<span class="keyword">int</span> * vis=(<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*(m+<span class="number">1</span>));  <span class="comment">//0表示节点为遍历，1表示节点遍历了左子树，2表示节点遍历了右子树 </span></span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*(m+<span class="number">1</span>));  <span class="comment">//指针不能直接sizeof(vis) </span></span><br><span class="line">	<span class="keyword">int</span> p=m; </span><br><span class="line">	<span class="keyword">while</span>(p)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="comment">//	printf("p=%d\n",p);</span></span><br><span class="line">		<span class="keyword">if</span>(!vis[p])</span><br><span class="line">		&#123;</span><br><span class="line">			vis[p]=<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(HT[p].l!=<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				p=HT[p].l;</span><br><span class="line">				marr[len++]=<span class="string">'0'</span>;</span><br><span class="line">			&#125; </span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(HT[p].r==<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				res[p]=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*(len+<span class="number">2</span>));<span class="comment">//'/0'和对象值</span></span><br><span class="line">				res[p][<span class="number">0</span>]=HT[p].v;</span><br><span class="line">				marr[len]=<span class="string">'\0'</span>;</span><br><span class="line">				<span class="built_in">strcpy</span>(&amp;(res[p][<span class="number">1</span>]),marr); </span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(vis[p]==<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			vis[p]=<span class="number">2</span>;</span><br><span class="line">			<span class="keyword">if</span>(HT[p].r!=<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				p=HT[p].r;</span><br><span class="line">				marr[len++]=<span class="string">'1'</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> </span><br><span class="line">		&#123;</span><br><span class="line">			p=HT[p].p;</span><br><span class="line">			len--;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//编码 </span></span><br><span class="line"><span class="function"><span class="keyword">char</span> * <span class="title">Encoding</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *arr,<span class="keyword">const</span> HuffmanCode HC,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">char</span> *res=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*n*<span class="built_in">strlen</span>(arr));<span class="comment">//单个字符的最大编码长度不超过n </span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="built_in">strlen</span>(arr);i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[i]==HC[j][<span class="number">0</span>])</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">strcat</span>(res,&amp;(HC[j][<span class="number">1</span>]));</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//解码 </span></span><br><span class="line"><span class="function"><span class="keyword">char</span> * <span class="title">Decoding</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *arr,<span class="keyword">const</span> HuffmanCode HC,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j,k,num=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">char</span> *res=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*<span class="built_in">strlen</span>(arr));<span class="comment">//待解码字符串的长度肯定大于原字符串 </span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="built_in">strlen</span>(arr);)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> len=<span class="built_in">strlen</span>(&amp;(HC[j][<span class="number">1</span>]));</span><br><span class="line">			<span class="keyword">for</span>(k=<span class="number">0</span>;k&lt;len;k++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(HC[j][<span class="number">1</span>+k]!=arr[i+k]||i&gt;=<span class="built_in">strlen</span>(arr))</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(k==len)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		res[num++]=HC[j][<span class="number">0</span>];</span><br><span class="line">		i+=<span class="built_in">strlen</span>(&amp;(HC[j][<span class="number">1</span>]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//实验数据P148：s t u v w x y z </span></span><br><span class="line"><span class="comment">//实验数据P148：0.05 0.29 0.07 0.08 0.14 0.23 0.03 0.11 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	HuffmanTree HT=<span class="literal">NULL</span>;</span><br><span class="line">	HuffmanCode HC_1,HC_2;</span><br><span class="line">	<span class="keyword">int</span> n,i,j;</span><br><span class="line">	<span class="keyword">double</span> m;</span><br><span class="line">	<span class="keyword">char</span> * carr=<span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">int</span> * narr=<span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"输入待创建的字符数量："</span>);                                                                </span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	getchar();</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"输入字符:"</span>);</span><br><span class="line">	carr=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*(n+<span class="number">1</span>));</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;	</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%c"</span>,&amp;carr[i]);</span><br><span class="line">		getchar();<span class="comment">//要打空格！ </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"输入对应权值:"</span>);</span><br><span class="line">	narr=(<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*(n+<span class="number">1</span>));</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;m);</span><br><span class="line">		narr[i]=(<span class="keyword">int</span>)(m*<span class="number">100</span>);	</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	CreateHuffmanTree(HT,narr,carr,n);</span><br><span class="line">	HC_1=CreateHuffmanCode_1(HT,carr,n);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"First_对应哈夫曼编码如下:\n"</span>); </span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%c : %s\n"</span>,HC_1[i][<span class="number">0</span>],&amp;HC_1[i][<span class="number">1</span>]);</span><br><span class="line">	HC_2=CreateHuffmanCode_2(HT,n);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\nSecond_对应哈夫曼编码如下：\n"</span>);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%c : %s\n"</span>,HC_2[i][<span class="number">0</span>],&amp;HC_2[i][<span class="number">1</span>]);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> sign;</span><br><span class="line">	<span class="keyword">char</span> karr[<span class="number">100</span>];</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"输入1编码，2译码，0退出:\n"</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;sign);</span><br><span class="line">	<span class="keyword">while</span>(sign)	</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(sign==<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"输入待编码字符串："</span>);</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%s"</span>,karr);</span><br><span class="line">			<span class="keyword">char</span> *res=Encoding(karr,HC_1,n);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"Result:%s\n"</span>,res);</span><br><span class="line">			<span class="built_in">free</span>(res);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"输入待解码字符串："</span>);</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%s"</span>,karr);</span><br><span class="line">			<span class="keyword">char</span> *res=Decoding(karr,HC_2,n);</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"Result:%s\n"</span>,res);</span><br><span class="line">			<span class="built_in">free</span>(res);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"输入1编码，2译码，0退出:\n"</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;sign);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Good Bye"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//001111101</span></span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/Huffman_res.png" style="zoom: 80%;" />
+
+
+
+
+
+<p>我怎么整了5，6小时这么久啊。。。。</p>
+<p>去买个芒果盒子缓一缓</p>
+
+    </div>
+
+    
+    
+    
+	<div>
+	  
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+	</div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>YoRo
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://birdyoro.github.io/2020/01/27/tree/" title="数据结构-树">https://birdyoro.github.io/2020/01/27/tree/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"> <i class="fa fa-tag"></i> # 数据结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/01/24/life-2020-1-24/" rel="prev" title="2020年1月生活小记">
+      <i class="fa fa-chevron-left"></i> 2020年1月生活小记
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+		
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#树"><span class="nav-number">1.</span> <span class="nav-text">树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#（一）树的基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">（一）树的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（二）二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">（二）二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-二叉树的定义及其主要特征"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.二叉树的定义及其主要特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-二叉树的顺序存储结构和链式存储结构"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.二叉树的顺序存储结构和链式存储结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-二叉树的遍历"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.二叉树的遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-线索二叉树的基本概念和构造"><span class="nav-number">1.2.4.</span> <span class="nav-text">4.线索二叉树的基本概念和构造</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（三）树、森林"><span class="nav-number">1.3.</span> <span class="nav-text">（三）树、森林</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-树的存储结构"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.树的存储结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-森林与二叉树树的转换"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.森林与二叉树树的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-树和森林的遍历"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.树和森林的遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#（四）树与二叉树的应用"><span class="nav-number">1.4.</span> <span class="nav-text">（四）树与二叉树的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-二叉排序树"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.二叉排序树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-平衡二叉树"><span class="nav-number">1.4.2.</span> <span class="nav-text">2.平衡二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-哈夫曼（Huffman）树和哈夫曼编码"><span class="nav-number">1.4.3.</span> <span class="nav-text">3.哈夫曼（Huffman）树和哈夫曼编码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#作用一、用于最佳判定算法"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">作用一、用于最佳判定算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作用二、哈夫曼编码解码"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">作用二、哈夫曼编码解码</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+	  
+	  <!-- diy -->
+	  <div id="music163player">
+       <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=26328682&auto=1&height=66"></iframe>
+	  </div>
+
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YoRo"
+      src="/images/author.jpg">
+  <p class="site-author-name" itemprop="name">YoRo</p>
+  <div class="site-description" itemprop="description">一点浩然气，千里快哉风</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/birdYoRo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;birdYoRo" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1411715797@qq.com" title="E-Mail → mailto:1411715797@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/yw2018" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;yw2018" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YoRo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">36k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">33 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
