@@ -60,7 +60,7 @@
 <meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/5222a8ed39c07bf72faa5fff21d970f.jpg">
 <meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/Huffman_res.png">
 <meta property="article:published_time" content="2020-01-27T13:06:48.000Z">
-<meta property="article:modified_time" content="2020-01-27T13:13:59.315Z">
+<meta property="article:modified_time" content="2020-01-27T13:36:01.334Z">
 <meta property="article:author" content="YoRo">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
@@ -217,7 +217,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-01-27 21:06:48 / 修改时间：21:13:59" itemprop="dateCreated datePublished" datetime="2020-01-27T21:06:48+08:00">2020-01-27</time>
+              <time title="创建时间：2020-01-27 21:06:48 / 修改时间：21:36:01" itemprop="dateCreated datePublished" datetime="2020-01-27T21:06:48+08:00">2020-01-27</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,7 +272,7 @@
 <p><strong>构造赫夫曼树的算法描述：</strong><br> 1.根据给定的n个权值{w1,w2,…,wn}构成n棵二叉树（只含一个节点）的集合F= {T1，T2，…,Tn}.,其中每颗二叉树Ti中只有一个带权为Wi的根节点，其左右子树为空。<br> 2.在F中选取两颗根节点的权值最小的树作为左右子树构造一颗新的二叉树，并且新的二叉树的根节点的权值为左右子树根节点上的权值之和。<br> 3.在F中删除这两棵树，将新的到的二叉树加入F中。<br> 4.重复二三，直到F中只剩下一棵树为止，这就是赫夫曼树。</p>
 </blockquote>
 <h4 id="作用一、用于最佳判定算法"><a href="#作用一、用于最佳判定算法" class="headerlink" title="作用一、用于最佳判定算法"></a>作用一、用于最佳判定算法</h4><p>例：将一个百分制转换为五级分制（严为蔚敏p144）：</p>
-<p>最直接简单的for循环形式</p>
+<p>最直接简单的if判断形式</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(a&lt;<span class="number">60</span>)res=<span class="string">"bad"</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(a&lt;<span class="number">70</span>)res=<span class="string">"pass"</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(a&lt;<span class="number">80</span>)res=<span class="string">"general"</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(a&lt;<span class="number">90</span>)res=<span class="string">"good"</span>;</span><br><span class="line"><span class="keyword">else</span> res=<span class="string">"excellent"</span>;</span><br></pre></td></tr></table></figure>
 
 <p>但是这个算法可以发现在输入量非常大时，如果&gt;90的成绩比重较大的话，那么比较次数就会非常多；如果&lt;60的成绩比重较大的话，那么比较次数就会比较理想，其本身形成的判定树如（a）所示：</p>
