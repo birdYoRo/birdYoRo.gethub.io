@@ -208,7 +208,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-03-02 14:13:38 / 修改时间：14:20:46" itemprop="dateCreated datePublished" datetime="2020-03-02T14:13:38+08:00">2020-03-02</time>
+              <time title="创建时间：2020-03-02 14:13:38 / 修改时间：14:24:57" itemprop="dateCreated datePublished" datetime="2020-03-02T14:13:38+08:00">2020-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,7 +228,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.1k</span>
+              <span>3.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -247,42 +247,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="关于变量命名"><a href="#关于变量命名" class="headerlink" title="关于变量命名"></a>关于变量命名</h1><h1 id="关于函数"><a href="#关于函数" class="headerlink" title="关于函数"></a>关于函数</h1><h2 id="amp"><a href="#amp" class="headerlink" title="&amp;"></a>&amp;</h2><h2 id="inlink"><a href="#inlink" class="headerlink" title="inlink"></a>inlink</h2><h1 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h1><h2 id="文件输入"><a href="#文件输入" class="headerlink" title="文件输入"></a>文件输入</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> ONLINE_JUDGE <span class="comment">//如果有oj系统（在线测评），则忽略文件读入，否则使用文件读入 </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">	freopen(<span class="string">"1.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);  <span class="comment">//从1.txt输入数据 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,n);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>关于<code>freopen</code>详见这篇<a href="https://blog.csdn.net/xavierdarkness/article/details/80638641">博客</a></p>
-<h2 id="c-快速IO"><a href="#c-快速IO" class="headerlink" title="c++快速IO"></a>c++快速IO</h2><p>当需要string对字符串自带的方便操作，而用string读入字符串时；或者使用cin，cout输入输出时，cin和cout会消耗大量的时间；</p>
-<p>此时可以在main函数最开始加入</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-
-<p>可以将cin和cout的效率优化到近似scanf和printf</p>
-<p><em>但是加入上述代码后只能使用cin和cout，不能再使用scanf和printf！！！</em></p>
-<blockquote>
-<p>sync_with_stdio`</p>
-<p>这个函数是一个“是否兼容stdio”的开关，C++为了兼容C，保证程序在使用了std::printf和std::cout的时候不发生混乱，将输出流绑到了一起。</p>
+          <blockquote>
+<p>总结了一些常用的stl，和写程序中一些好用的函数，以及一些偶然间看到的知识</p>
 </blockquote>
-<h2 id="JAVA快速IO"><a href="#JAVA快速IO" class="headerlink" title="JAVA快速IO"></a>JAVA快速IO</h2><h2 id="JAVA的换行"><a href="#JAVA的换行" class="headerlink" title="JAVA的换行"></a>JAVA的换行</h2><p>在使用java提交时</p>
-<p><code>System.out.println();</code>和<code>System.out.print(&quot;\n&quot;)</code>都会带来换行的效果，但是在对输出格式严格要求的OJ中，会发现，一些时候这两种函数的使用会带来PE或者WA的结果</p>
-<blockquote>
-<p>计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的玩意，每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候，要用去0.2秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界；另一个叫做“换行”，告诉打字机把纸向下移一行。这就是“换行”和“回车”的来历，从它们的英语名字上也可以看出一二。<br>后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；Mac系统里，每行结尾是“&lt;回车&gt;”。一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
-<p>所以说:<br><strong>Windows下System.out.println()等于System.out.print(“\r\n”);<br>Unix 下System.out.println()等于System.out.print(“\n”);<br>Mac下System.out.println()等于System.out.print(“\r”);</strong><br>————————————————<br>版权声明：本文为CSDN博主「SHI.L」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/rick_geek/article/details/90344214">https://blog.csdn.net/rick_geek/article/details/90344214</a></p>
-</blockquote>
-<p>因此使用<code>System.out.println()</code>在不同的操作系统带来的结果是不同的</p>
-<p><code>System.out.print()</code>可以规定具体的换行形式</p>
-<h1 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h1><h1 id="min-element-amp-max-element"><a href="#min-element-amp-max-element" class="headerlink" title="min_element&amp;max_element"></a>min_element&amp;max_element</h1><p><code>min_element(begin,end)</code>第一个参数是首元素指针或者容器的begin()，第二个参数是尾元素指针或者容器的end()，返回序列中<em>最小元素</em>的<strong>指针或者迭代器</strong></p>
-<p><code>max_element(begin,end)</code>第一个参数是首元素指针或者容器的begin()，第二个参数是尾元素指针或者容器的end()，返回序列中<em>最大元素</em>的<strong>指针或者迭代器</strong></p>
-<p>使用代码</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n=<span class="number">5</span>;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ar;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		ar.push_back(i);</span><br><span class="line">	<span class="keyword">int</span> arr[<span class="number">5</span>]=&#123;<span class="number">1</span>,<span class="number">12</span>,<span class="number">-1</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">	<span class="keyword">int</span> m1=*min_element(arr,arr+n);</span><br><span class="line">	<span class="keyword">int</span> m2=*max_element(arr,arr+n);</span><br><span class="line">	<span class="keyword">int</span> m3=*min_element(ar.begin(),ar.end());</span><br><span class="line">	<span class="keyword">int</span> m4=*max_element(ar.begin(),ar.end());</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;m1&lt;&lt;<span class="string">" "</span>&lt;&lt;m2&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;m3&lt;&lt;<span class="string">" "</span>&lt;&lt;m4;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果</p>
-<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/1.png" style="zoom: 67%;" />
-
-<h1 id="pair"><a href="#pair" class="headerlink" title="pair"></a>pair</h1><h1 id="string"><a href="#string" class="headerlink" title="string"></a>string</h1><h1 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h1><h1 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h1><h1 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h1><p>建一个n个节点的大（小）根堆的时间复杂度是<strong>O(nlogn)</strong>，后序堆的查找、插入和删除的操作的时间复杂度为<strong>O(logn)</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	priority_queue&lt;<span class="keyword">int</span>,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;,greater&lt;<span class="keyword">int</span>&gt; &gt; que;<span class="comment">//小根堆</span></span><br><span class="line">	priority_queue&lt;<span class="keyword">int</span>,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;,less&lt;<span class="keyword">int</span>&gt; &gt; que1;<span class="comment">//大根堆</span></span><br><span class="line">	priority_queue&lt;<span class="keyword">int</span>&gt; que2;<span class="comment">//默认大根堆</span></span><br><span class="line">	srand((<span class="keyword">int</span>)time(<span class="literal">NULL</span>));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> k=rand()%<span class="number">100</span>;</span><br><span class="line">		que.push(k);</span><br><span class="line">		que1.push(k);</span><br><span class="line">		que2.push(k);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(!que.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> k=que.top();</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d "</span>,k);</span><br><span class="line">		que.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">	<span class="keyword">while</span>(!que1.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> k=que1.top();</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d "</span>,k);</span><br><span class="line">		que1.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">	<span class="keyword">while</span>(!que2.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> k=que2.top();</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d "</span>,k);</span><br><span class="line">		que2.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行结果</p>
-<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20200224210014.png" style="zoom: 67%;" />
-
-<h1 id="set"><a href="#set" class="headerlink" title="set"></a>set</h1><h1 id="map"><a href="#map" class="headerlink" title="map"></a>map</h1><h1 id="关于各类数据"><a href="#关于各类数据" class="headerlink" title="关于各类数据"></a>关于各类数据</h1><h1 id="关于struct"><a href="#关于struct" class="headerlink" title="关于struct"></a>关于struct</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/03/02/sf-1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -329,7 +304,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-03-02 14:10:41 / 修改时间：14:20:49" itemprop="dateCreated datePublished" datetime="2020-03-02T14:10:41+08:00">2020-03-02</time>
+              <time title="创建时间：2020-03-02 14:10:41 / 修改时间：14:26:00" itemprop="dateCreated datePublished" datetime="2020-03-02T14:10:41+08:00">2020-03-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -349,7 +324,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8</span>
+              <span>25</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -368,7 +343,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="第一单元思维导图"><a href="#第一单元思维导图" class="headerlink" title="第一单元思维导图"></a>第一单元思维导图</h1><p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/os_01.png" alt=""></p>
+          <h1 id="第一单元思维导图"><a href="#第一单元思维导图" class="headerlink" title="第一单元思维导图"></a>第一单元思维导图</h1><blockquote>
+<p>鼠标右击选择保存即可保存到本地查看</p>
+</blockquote>
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/os_01.png" alt=""></p>
 
       
     </div>
@@ -620,7 +598,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-02-23 22:09:11" itemprop="dateModified" datetime="2020-02-23T22:09:11+08:00">2020-02-23</time>
+                <time title="修改时间：2020-03-02 14:29:03" itemprop="dateModified" datetime="2020-03-02T14:29:03+08:00">2020-03-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -640,7 +618,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>242</span>
+              <span>273</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
