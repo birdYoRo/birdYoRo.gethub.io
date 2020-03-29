@@ -56,8 +56,9 @@
 <meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/MM.png">
 <meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20200315162207.png">
 <meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20200315162306.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/IMG_6712(20200323-110651).JPG">
 <meta property="article:published_time" content="2020-03-15T07:13:36.000Z">
-<meta property="article:modified_time" content="2020-03-16T03:51:33.721Z">
+<meta property="article:modified_time" content="2020-03-23T09:18:39.361Z">
 <meta property="article:author" content="YoRo">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -161,7 +162,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">17</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
 
   </li>
   </ul>
@@ -220,7 +221,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-16 11:51:33" itemprop="dateModified" datetime="2020-03-16T11:51:33+08:00">2020-03-16</time>
+                <time title="修改时间：2020-03-23 17:18:39" itemprop="dateModified" datetime="2020-03-23T17:18:39+08:00">2020-03-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,7 +241,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
+              <span>2.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -336,6 +337,68 @@
 <li><p>数值计算：页面大小L，逻辑地址A，页号P=A/L，页内偏移量W=A%L</p>
 </li>
 <li><p>位运算：先右移再与运算，比如逻辑地址LA=0040 0000H，页面大小为1MB时，页号为P=LA&gt;&gt;20;如果LA是二级页表，一级页号占8位，二级页号占8位，页内偏移16位，那二级页号就可以表示为P=<strong>(LA&gt;&gt;16)&amp;0xFF</strong>;</p>
+</li>
+</ul>
+<h1 id="虚拟内存管理"><a href="#虚拟内存管理" class="headerlink" title="虚拟内存管理"></a>虚拟内存管理</h1><ul>
+<li>传统存储管理的方式的特征：<ul>
+<li>一次性</li>
+<li>驻留性</li>
+</ul>
+</li>
+<li>虚拟存储器的特征：<ul>
+<li>多次性</li>
+<li>对换性</li>
+<li>虚拟性</li>
+</ul>
+</li>
+<li>局部性原理：<ul>
+<li>时间局部性</li>
+<li>空间局部性</li>
+</ul>
+</li>
+<li>页表机制：新增四个字段<ul>
+<li>状态位P</li>
+<li>访问字段A</li>
+<li>修改位M</li>
+<li>外存地址</li>
+</ul>
+</li>
+<li>地址变换机构：<ul>
+<li><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/IMG_6712(20200323-110651).JPG" alt=""></li>
+<li>由上流程图可以看成，如果快表和内存中都找不到对应页号，那么会从外存中寻找，找到后会换入内存，<strong>同时更新快表</strong>，更新后需要再访问一次<strong>TLB</strong>，<strong>并且需要再一次访问内存（读出数据）</strong>。</li>
+</ul>
+</li>
+<li>页面置换算法：<ul>
+<li>最佳（OPT）置换算法：用于评价</li>
+<li>先进先出（FIFO）页面置换算法</li>
+<li>最近最久未使用（LRU，Least Recently Used）置换算法</li>
+<li>时钟（CLOCK）置换算法（又称最近未用，Not Recently Used，NRU）：给每个帧附加使用位<ul>
+<li>改进型CLOCk算法：增加修改位</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>驻留集：给一个进程分配的物理页框的集合就算这个进程的驻留集，三种分配策略<ul>
+<li>固定分配局部置换</li>
+<li>可变分配全局置换</li>
+<li>可变分配局部置换</li>
+</ul>
+</li>
+<li>调入页面的时机：<ul>
+<li>预调页策略：运行时调人</li>
+<li>请求调页策略：运行期间调入</li>
+</ul>
+</li>
+<li>从何处调入：外存有两部分：用于存放文件的<strong>文件区</strong>和用于存放对换页面的<strong>对换区</strong>。<ul>
+<li>系统拥有足够的对换区空间</li>
+<li>系统缺少足够的对换区空间</li>
+<li>UNIX方式</li>
+</ul>
+</li>
+<li>抖动：导致抖动的主要原因：<em>置换算法不合理还是某个进程频繁访问的页面数目高于可用物理页帧数？？？</em></li>
+<li>工作集：由时间t和工作集窗口大小△来确定；<ul>
+<li><strong>工作集模型</strong>：若所有进程的工作集之和超过了可用物理块的总数，<strong>则操作系统会暂停一个进程</strong>。</li>
+</ul>
 </li>
 </ul>
 <h1 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h1><ul>
@@ -465,7 +528,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#装入时地址转换"><span class="nav-number">1.</span> <span class="nav-text">装入时地址转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#名词"><span class="nav-number">2.</span> <span class="nav-text">名词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#地址空间"><span class="nav-number">3.</span> <span class="nav-text">地址空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据表示"><span class="nav-number">4.</span> <span class="nav-text">数据表示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#名词-1"><span class="nav-number">5.</span> <span class="nav-text">名词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据计算"><span class="nav-number">6.</span> <span class="nav-text">数据计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ps"><span class="nav-number">7.</span> <span class="nav-text">ps</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#装入时地址转换"><span class="nav-number">1.</span> <span class="nav-text">装入时地址转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#名词"><span class="nav-number">2.</span> <span class="nav-text">名词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#地址空间"><span class="nav-number">3.</span> <span class="nav-text">地址空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据表示"><span class="nav-number">4.</span> <span class="nav-text">数据表示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#名词-1"><span class="nav-number">5.</span> <span class="nav-text">名词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据计算"><span class="nav-number">6.</span> <span class="nav-text">数据计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟内存管理"><span class="nav-number">7.</span> <span class="nav-text">虚拟内存管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ps"><span class="nav-number">8.</span> <span class="nav-text">ps</span></a></li></ol></div>
       </div>
 	  
 	  <!-- diy -->
@@ -487,7 +550,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -548,12 +611,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">86k</span>
+    <span title="站点总字数">111k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:19</span>
+    <span title="站点阅读时长">1:41</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
   </div>
