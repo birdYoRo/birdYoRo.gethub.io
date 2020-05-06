@@ -270,7 +270,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoro99.gitee.io/yoro/2020/04/28/os-4/">
+    <link itemprop="mainEntityOfPage" href="http://yoro99.gitee.io/yoro/2020/04/28/os-5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/yoro/images/author.jpg">
@@ -284,7 +284,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/yoro/2020/04/28/os-4/" class="post-title-link" itemprop="url">操作系统0x04</a>
+            <a href="/yoro/2020/04/28/os-5/" class="post-title-link" itemprop="url">操作系统0x05</a>
         </h1>
 
         <div class="post-meta">
@@ -301,7 +301,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 09:42:48" itemprop="dateModified" datetime="2020-05-02T09:42:48+08:00">2020-05-02</time>
+                <time title="修改时间：2020-05-06 08:20:11" itemprop="dateModified" datetime="2020-05-06T08:20:11+08:00">2020-05-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -321,7 +321,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6</span>
+              <span>173</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -341,11 +341,13 @@
 
       
           <blockquote>
-<p>第四章</p>
+<p>第五章，几个前置的组成原理知识</p>
+<p><a href="https://blog.csdn.net/tectrol/article/details/80638457">RAM与ROM</a>:随机存取存储器（Random Access Memory，RAM）, 只读存储器（Read Only Memory，ROM）</p>
+<p><a href="https://blog.csdn.net/zhejfl/article/details/82555634">DMA</a>(Direct Memory Access,直接存储器访问)</p>
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/yoro/2020/04/28/os-4/#more" rel="contents">
+              <a class="btn" href="/yoro/2020/04/28/os-5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -386,7 +388,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/yoro/2020/04/28/pat-2020-7/" class="post-title-link" itemprop="url">PAT周练习0x07 1071-1080</a>
+            <a href="/yoro/2020/04/28/pat-2020-7/" class="post-title-link" itemprop="url">PAT周练习0x07 1069-1080</a>
         </h1>
 
         <div class="post-meta">
@@ -403,7 +405,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 15:47:04" itemprop="dateModified" datetime="2020-05-02T15:47:04+08:00">2020-05-02</time>
+                <time title="修改时间：2020-05-05 10:24:28" itemprop="dateModified" datetime="2020-05-05T10:24:28+08:00">2020-05-05</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -423,14 +425,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>10k</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>9 分钟</span>
+              <span>10 分钟</span>
             </span>
 
         </div>
@@ -443,6 +445,14 @@
 
       
           <blockquote>
+<p>中间的题目稍微难一点</p>
+<p>本周重点：</p>
+<ul>
+<li><p>printf加快输出数据时，对string可以使用其<code>c_str()</code>方法转化为字符数组；</p>
+</li>
+<li><p>在最短路的计算中要注意可能会重复给出边的长度，要根据题目去相应的更大值或者更小值 -1072</p>
+</li>
+</ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line">&gt;<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">&gt;<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line">&gt;&#123;</span><br><span class="line"><span class="built_in">string</span> str;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;str;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s\n"</span>,str.c_str());</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;	</span><br><span class="line">&gt;&#125; </span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -582,7 +592,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoro99.gitee.io/yoro/2020/04/21/os-5/">
+    <link itemprop="mainEntityOfPage" href="http://yoro99.gitee.io/yoro/2020/04/21/os-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/yoro/images/author.jpg">
@@ -596,7 +606,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/yoro/2020/04/21/os-5/" class="post-title-link" itemprop="url">操作系统0x05</a>
+            <a href="/yoro/2020/04/21/os-4/" class="post-title-link" itemprop="url">操作系统0x04</a>
         </h1>
 
         <div class="post-meta">
@@ -613,7 +623,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-28 10:48:50" itemprop="dateModified" datetime="2020-04-28T10:48:50+08:00">2020-04-28</time>
+                <time title="修改时间：2020-05-06 08:59:02" itemprop="dateModified" datetime="2020-05-06T08:59:02+08:00">2020-05-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -633,7 +643,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>173</span>
+              <span>631</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -653,13 +663,31 @@
 
       
           <blockquote>
-<p>第五章，几个前置的组成原理知识</p>
-<p><a href="https://blog.csdn.net/tectrol/article/details/80638457">RAM与ROM</a>:随机存取存储器（Random Access Memory，RAM）, 只读存储器（Read Only Memory，ROM）</p>
-<p><a href="https://blog.csdn.net/zhejfl/article/details/82555634">DMA</a>(Direct Memory Access,直接存储器访问)</p>
+<p>第四章</p>
+<table>
+<thead>
+<tr>
+<th>短语</th>
+<th>意思</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FCB</td>
+<td>文件控制块</td>
+</tr>
+<tr>
+<td>FAT，File Allocation Table</td>
+<td>文件分配表</td>
+</tr>
+<tr>
+<td>ACL，Access-Control List</td>
+<td>访问控制列表</td>
+</tr>
+</tbody></table>
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/yoro/2020/04/21/os-5/#more" rel="contents">
+              <a class="btn" href="/yoro/2020/04/21/os-4/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1361,12 +1389,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">203k</span>
+    <span title="站点总字数">205k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:05</span>
+    <span title="站点阅读时长">3:07</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
   </div>
