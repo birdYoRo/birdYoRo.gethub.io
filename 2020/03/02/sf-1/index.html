@@ -60,7 +60,7 @@
 <meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/Snipaste_2020-03-31_15-07-14.png">
 <meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/5.png">
 <meta property="article:published_time" content="2020-03-02T06:13:38.000Z">
-<meta property="article:modified_time" content="2020-05-02T04:45:14.575Z">
+<meta property="article:modified_time" content="2020-05-08T07:05:56.813Z">
 <meta property="article:author" content="YoRo">
 <meta property="article:tag" content="算法">
 <meta property="article:tag" content="OJ">
@@ -165,7 +165,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/yoro/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/yoro/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">32</span></a>
 
   </li>
   </ul>
@@ -224,7 +224,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-02 12:45:14" itemprop="dateModified" datetime="2020-05-02T12:45:14+08:00">2020-05-02</time>
+                <time title="修改时间：2020-05-08 15:05:56" itemprop="dateModified" datetime="2020-05-08T15:05:56+08:00">2020-05-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,14 +244,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7.4k</span>
+              <span>9.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>9 分钟</span>
             </span>
 
         </div>
@@ -375,6 +375,9 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> ONLINE_JUDGE <span class="comment">//如果有oj系统（在线测评），则忽略文件读入，否则使用文件读入 </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">	freopen(<span class="string">"1.txt"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);  <span class="comment">//从1.txt输入数据 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,n);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>关于<code>freopen</code>详见这篇<a href="https://blog.csdn.net/xavierdarkness/article/details/80638641">博客</a></p>
+<h2 id="读取一整行"><a href="#读取一整行" class="headerlink" title="读取一整行"></a>读取一整行</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> str;</span><br><span class="line">getline(<span class="built_in">cin</span>,str);</span><br></pre></td></tr></table></figure>
+
+<p>如果getline前面有其他的输入语句，需要加getchar()来清除缓冲区的回车。</p>
 <h2 id="c-快速IO"><a href="#c-快速IO" class="headerlink" title="c++快速IO"></a>c++快速IO</h2><p>当需要string对字符串自带的方便操作，而用string读入字符串时；或者使用cin，cout输入输出时，cin和cout会消耗大量的时间；</p>
 <p>此时可以在main函数最开始加入</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
@@ -409,7 +412,89 @@
 <p>运行结果</p>
 <img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/Snipaste_2020-03-21_20-47-04.png" style="zoom: 67%;" />
 
-<h1 id="pair"><a href="#pair" class="headerlink" title="pair"></a>pair</h1><h1 id="string"><a href="#string" class="headerlink" title="string"></a>string</h1><h1 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h1><table>
+<h1 id="pair"><a href="#pair" class="headerlink" title="pair"></a>pair</h1><h1 id="string"><a href="#string" class="headerlink" title="string"></a>string</h1><blockquote>
+<p><a href="https://www.cnblogs.com/X-Do-Better/p/8628492.html">参考博客</a></p>
+</blockquote>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">string</span> str;  <span class="comment">//定义了一个空字符串str</span></span><br><span class="line">    str = <span class="string">"Hello world"</span>;   <span class="comment">// 给str赋值为"Hello world"</span></span><br><span class="line">    <span class="keyword">char</span> cstr[] = <span class="string">"abcde"</span>;  <span class="comment">//定义了一个C字符串</span></span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s1</span><span class="params">(str)</span></span>;       <span class="comment">//调用复制构造函数生成s1，s1为str的复制品</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;s1&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s2</span><span class="params">(str,<span class="number">6</span>)</span></span>;     <span class="comment">//将str内，开始于位置6的部分当作s2的初值</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;s2&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s3</span><span class="params">(str,<span class="number">6</span>,<span class="number">3</span>)</span></span>;  <span class="comment">//将str内，开始于6且长度顶多为3的部分作为s3的初值</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;s3&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s4</span><span class="params">(cstr)</span></span>;   <span class="comment">//将C字符串作为s4的初值</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;s4&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s5</span><span class="params">(cstr,<span class="number">3</span>)</span></span>;  <span class="comment">//将C字符串前3个字符作为字符串s5的初值。</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;s5&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s6</span><span class="params">(<span class="number">5</span>,<span class="string">'A'</span>)</span></span>;  <span class="comment">//生成一个字符串，包含5个'A'字符</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;s6&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">s7</span><span class="params">(str.begin(),str.begin()+<span class="number">5</span>)</span></span>; <span class="comment">//区间str.begin()和str.begin()+5内的字符作为初值</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;s7&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用scanf和printf进行string的输入输出"><a href="#用scanf和printf进行string的输入输出" class="headerlink" title="用scanf和printf进行string的输入输出"></a>用scanf和printf进行string的输入输出</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> in[<span class="number">100</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,in);</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">str</span><span class="params">(in)</span></span>;</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s\n"</span>,str.c_str);</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p>引用<code>#include &lt;string&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int size()const;</td>
+<td>返回当前字符串的大小（中文返回值+2）</td>
+</tr>
+<tr>
+<td>int length()const;</td>
+<td>返回当前字符串的长度（中文返回值+2）</td>
+</tr>
+<tr>
+<td>bool empty()const;</td>
+<td>当前字符串是否为空</td>
+</tr>
+<tr>
+<td>void resize(int len,char c);</td>
+<td>把字符串当前大小置为len，多去少补，多出的字符c填充不足的部分</td>
+</tr>
+<tr>
+<td><strong>size_type find( const string &amp;str);</strong></td>
+<td>返回str在字符串中第一次出现的位置（从0开始查找），如果没找到则返回<strong>string::npos</strong></td>
+</tr>
+<tr>
+<td>size_type find( const basic_string &amp;str, size_type index );</td>
+<td>返回str在字符串中第一次出现的位置（从index开始查找），如果没找到则返回<strong>string::npos</strong></td>
+</tr>
+<tr>
+<td>size_type find( const char *str, size_type index );</td>
+<td>/同上</td>
+</tr>
+<tr>
+<td>size_type find( const char *str, size_type index, size_type length );</td>
+<td>返回str在字符串中第一次出现的位置（从index开始查找，长度为length），如果没找到就返回string::npos</td>
+</tr>
+<tr>
+<td>size_type find( char ch, size_type index );</td>
+<td>返回字符ch在字符串中第一次出现的位置（从index开始查找），如果没找到就返回string::npos</td>
+</tr>
+<tr>
+<td><strong>string &amp;insert(int p,const string &amp;s);</strong></td>
+<td>在p位置插入字符串s</td>
+</tr>
+<tr>
+<td><strong>string &amp;erase(int p, int n);</strong></td>
+<td>删除p开始的n个字符，返回修改后的字符串</td>
+</tr>
+<tr>
+<td>string &amp;append(const char *s);</td>
+<td>把字符串s连接到当前字符串结尾</td>
+</tr>
+<tr>
+<td><strong>void push_back(char c)</strong></td>
+<td>当前字符串尾部加一个字符c</td>
+</tr>
+<tr>
+<td><strong>const char *c_str()const;</strong></td>
+<td>返回一个以null终止的c字符串，即c_str()函数返回一个指向正规C字符串的指针, 内容与本string串相同,用于string转const char*</td>
+</tr>
+<tr>
+<td><strong>string substr(int pos, int n) const;</strong></td>
+<td>返回pos开始的n个字符组成的字符串</td>
+</tr>
+<tr>
+<td><strong>string substr(int pos) const;</strong></td>
+<td>返回pos开始的到结尾的字符组成的字符串</td>
+</tr>
+</tbody></table>
+<p>string重载了+运算符，因此连接可以用<code>str1+str2</code>！</p>
+<p>string重载了比较运算符，可以直接通过<code>==</code>,<code>&gt;</code>,<code>&lt;</code>进行比较。</p>
+<h1 id="queue"><a href="#queue" class="headerlink" title="queue"></a>queue</h1><h2 id="常用方法-1"><a href="#常用方法-1" class="headerlink" title="常用方法"></a>常用方法</h2><table>
 <thead>
 <tr>
 <th>方法</th>
@@ -442,7 +527,7 @@
 </tr>
 </tbody></table>
 <h1 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h1><h1 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h1><p>priority_queue类似于数据结构的堆；队列取队头是front，堆是top！！！</p>
-<table>
+<h2 id="常用方法-2"><a href="#常用方法-2" class="headerlink" title="常用方法"></a>常用方法</h2><table>
 <thead>
 <tr>
 <th>方法</th>
@@ -501,7 +586,7 @@
 <li>set类似于数据结构中的二叉平衡树AVL，特点是每个元素唯一，即插入同样的元素不会改变集合大小，在用迭代器输出时从小到大输出；</li>
 <li>set默认会对数组排序，为了加快速度可以使用<strong>unordered_set</strong></li>
 </ul>
-<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><table>
+<h2 id="常用方法-3"><a href="#常用方法-3" class="headerlink" title="常用方法"></a>常用方法</h2><table>
 <thead>
 <tr>
 <th>方法</th>
@@ -670,7 +755,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DEV环境配置"><span class="nav-number">1.</span> <span class="nav-text">DEV环境配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快捷键"><span class="nav-number">2.</span> <span class="nav-text">快捷键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于各类数据"><span class="nav-number">3.</span> <span class="nav-text">关于各类数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于函数"><span class="nav-number">4.</span> <span class="nav-text">关于函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#amp"><span class="nav-number">4.1.</span> <span class="nav-text">&amp;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inlink"><span class="nav-number">4.2.</span> <span class="nav-text">inlink</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输入输出"><span class="nav-number">5.</span> <span class="nav-text">输入输出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件输入"><span class="nav-number">5.1.</span> <span class="nav-text">文件输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c-快速IO"><span class="nav-number">5.2.</span> <span class="nav-text">c++快速IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA快速IO"><span class="nav-number">5.3.</span> <span class="nav-text">JAVA快速IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA的换行"><span class="nav-number">5.4.</span> <span class="nav-text">JAVA的换行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sort"><span class="nav-number">6.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#min-element-amp-max-element"><span class="nav-number">7.</span> <span class="nav-text">min_element&amp;max_element</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pair"><span class="nav-number">8.</span> <span class="nav-text">pair</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#string"><span class="nav-number">9.</span> <span class="nav-text">string</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#queue"><span class="nav-number">10.</span> <span class="nav-text">queue</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#stack"><span class="nav-number">11.</span> <span class="nav-text">stack</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#priority-queue"><span class="nav-number">12.</span> <span class="nav-text">priority_queue</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#set"><span class="nav-number">13.</span> <span class="nav-text">set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用方法"><span class="nav-number">13.1.</span> <span class="nav-text">常用方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#map"><span class="nav-number">14.</span> <span class="nav-text">map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于struct"><span class="nav-number">15.</span> <span class="nav-text">关于struct</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PS-1"><span class="nav-number">16.</span> <span class="nav-text">PS_1</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DEV环境配置"><span class="nav-number">1.</span> <span class="nav-text">DEV环境配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快捷键"><span class="nav-number">2.</span> <span class="nav-text">快捷键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于各类数据"><span class="nav-number">3.</span> <span class="nav-text">关于各类数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于函数"><span class="nav-number">4.</span> <span class="nav-text">关于函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#amp"><span class="nav-number">4.1.</span> <span class="nav-text">&amp;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inlink"><span class="nav-number">4.2.</span> <span class="nav-text">inlink</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输入输出"><span class="nav-number">5.</span> <span class="nav-text">输入输出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件输入"><span class="nav-number">5.1.</span> <span class="nav-text">文件输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读取一整行"><span class="nav-number">5.2.</span> <span class="nav-text">读取一整行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c-快速IO"><span class="nav-number">5.3.</span> <span class="nav-text">c++快速IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA快速IO"><span class="nav-number">5.4.</span> <span class="nav-text">JAVA快速IO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA的换行"><span class="nav-number">5.5.</span> <span class="nav-text">JAVA的换行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sort"><span class="nav-number">6.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#min-element-amp-max-element"><span class="nav-number">7.</span> <span class="nav-text">min_element&amp;max_element</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pair"><span class="nav-number">8.</span> <span class="nav-text">pair</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#string"><span class="nav-number">9.</span> <span class="nav-text">string</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">9.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用scanf和printf进行string的输入输出"><span class="nav-number">9.2.</span> <span class="nav-text">用scanf和printf进行string的输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用方法"><span class="nav-number">9.3.</span> <span class="nav-text">常用方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#queue"><span class="nav-number">10.</span> <span class="nav-text">queue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用方法-1"><span class="nav-number">10.1.</span> <span class="nav-text">常用方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#stack"><span class="nav-number">11.</span> <span class="nav-text">stack</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#priority-queue"><span class="nav-number">12.</span> <span class="nav-text">priority_queue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用方法-2"><span class="nav-number">12.1.</span> <span class="nav-text">常用方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#set"><span class="nav-number">13.</span> <span class="nav-text">set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用方法-3"><span class="nav-number">13.1.</span> <span class="nav-text">常用方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#map"><span class="nav-number">14.</span> <span class="nav-text">map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于struct"><span class="nav-number">15.</span> <span class="nav-text">关于struct</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PS-1"><span class="nav-number">16.</span> <span class="nav-text">PS_1</span></a></li></ol></div>
       </div>
 	  
 	
@@ -689,7 +774,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/yoro/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -750,12 +835,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">211k</span>
+    <span title="站点总字数">221k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:12</span>
+    <span title="站点阅读时长">3:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
   </div>
