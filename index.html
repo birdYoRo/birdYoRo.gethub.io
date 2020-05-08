@@ -592,7 +592,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-08 11:53:15" itemprop="dateModified" datetime="2020-05-08T11:53:15+08:00">2020-05-08</time>
+                <time title="修改时间：2020-05-08 15:11:13" itemprop="dateModified" datetime="2020-05-08T15:11:13+08:00">2020-05-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -635,17 +635,21 @@
 <p>中间的题目稍微难一点，遇到一个01背包和一个贪心没做出来，额。</p>
 <p>本周重点：</p>
 <ul>
-<li>01背包😭-1068</li>
-<li>贪心，感觉很不错的题目，可以拿去放到ACM里了😂 -1067</li>
-<li>注意题目细节，dfs的时候不一定是查过的结点就不查，可能由于位置的改动需要再次查找-1075 -1076</li>
-<li><code>ctype.h</code>中判断字符的<code>isdigit</code>，<code>isalnum</code>，<code>isalpha</code>三个函数，还有c++中重载了+运算符，可以做字符串加法，感觉知道这个东西但是几乎不用 -1071。</li>
-<li>在最短路的计算中要注意可能会重复给出边的长度，要根据题目取相应的更大值或者更小值 -1072</li>
-<li>printf加快输出数据时，对string可以使用其<code>c_str()</code>方法转化为字符数组；</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;  //加快I/O的一个方法</span></span></span><br><span class="line">&gt;<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">&gt;<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line">&gt;&#123;</span><br><span class="line"><span class="keyword">char</span> ar[<span class="number">10</span>];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>,ar);</span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">str</span><span class="params">(ar)</span></span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%s\n"</span>,str.c_str());</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;	</span><br><span class="line">&gt;&#125; </span><br><span class="line">&gt;<span class="comment">/*result:</span></span><br><span class="line"><span class="comment">&gt;yoro99</span></span><br><span class="line"><span class="comment">&gt;yoro99</span></span><br><span class="line"><span class="comment">&gt;*/</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>c_str可以用printf输出string的数据。</li>
+<li><p>01背包😭-1068</p>
+</li>
+<li><p>贪心，感觉很不错的题目，可以拿去放到ACM里了😂 -1067</p>
+</li>
+<li><p>注意题目细节，dfs的时候不一定是查过的结点就不查，可能由于位置的改动需要再次查找-1075 -1076</p>
+</li>
+<li><p><code>ctype.h</code>中判断字符的<code>isdigit</code>，<code>isalnum</code>，<code>isalpha</code>三个函数，还有c++中重载了+运算符，可以做字符串加法，感觉知道这个东西但是几乎不用 -1071。</p>
+</li>
+<li><p>在最短路的计算中要注意可能会重复给出边的长度，要根据题目取相应的更大值或者更小值 -1072</p>
+</li>
+<li><p>printf加快输出数据时，对string可以使用其<code>c_str()</code>方法转化为字符数组；</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;  //加快I/O的一个方法</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> ar[<span class="number">10</span>];</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,ar);</span><br><span class="line">	<span class="function"><span class="built_in">string</span> <span class="title">str</span><span class="params">(ar)</span></span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>,str.c_str());</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;	</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">/*result:</span></span><br><span class="line"><span class="comment">yoro99</span></span><br><span class="line"><span class="comment">yoro99</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>c_str可以用printf输出string的数据。</p>
+</li>
 </ul>
 <p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/Snipaste_2020-05-07_00-34-26.png" alt=""></p>
 </blockquote>
