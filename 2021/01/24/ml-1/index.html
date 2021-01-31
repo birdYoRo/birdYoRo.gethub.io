@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/yoro/images/lufei%20%5B128x128%5D.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/yoro/images/lufei%20%5B32x32%5D.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/yoro/images/lufei%20%5B16x16%5D.ico">
+  <link rel="mask-icon" href="/yoro/images/lf.svg" color="#222">
+
+<link rel="stylesheet" href="/yoro/css/main.css">
+
+
+<link rel="stylesheet" href="/yoro/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoro99.gitee.io/yoro').hostname,
+    root: '/yoro/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="回归模型：输入数据得到数据 应用：Stock Market Forecast股票预测，Self-driving Car无人车驾驶，Recommendation推荐系统（淘宝，亚马逊）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ML_0x01 Regression">
+<meta property="og:url" content="http://yoro99.gitee.io/yoro/2021/01/24/ml-1/index.html">
+<meta property="og:site_name" content="YoRo99のblog">
+<meta property="og:description" content="回归模型：输入数据得到数据 应用：Stock Market Forecast股票预测，Self-driving Car无人车驾驶，Recommendation推荐系统（淘宝，亚马逊）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129141916.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129143627.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129144107.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129144144.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129144201.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/Snipaste_2021-01-29_13-51-31.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129145318.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129135928.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/IMG_8871(20210129-150004).JPG">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129150515.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129151704.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129152858.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129222819.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129223320.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129220540.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/Snipaste_2021-01-24_16-34-40.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210131145137.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210131145335.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210131145430.png">
+<meta property="og:image" content="c:%5CUsers%5C14117%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210131150446238.png">
+<meta property="article:published_time" content="2021-01-24T06:11:07.000Z">
+<meta property="article:modified_time" content="2021-01-31T08:42:39.227Z">
+<meta property="article:author" content="YoRo">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129141916.png">
+
+<link rel="canonical" href="http://yoro99.gitee.io/yoro/2021/01/24/ml-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>ML_0x01 Regression | YoRo99のblog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/yoro/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YoRo99のblog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">思绪像风，停留在此</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/yoro/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/yoro/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/yoro/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/yoro/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/yoro/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">44</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoro99.gitee.io/yoro/2021/01/24/ml-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yoro/images/author.jpg">
+      <meta itemprop="name" content="YoRo">
+      <meta itemprop="description" content="一点浩然气，千里快哉风">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YoRo99のblog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ML_0x01 Regression
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-24 14:11:07" itemprop="dateCreated datePublished" datetime="2021-01-24T14:11:07+08:00">2021-01-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-31 16:42:39" itemprop="dateModified" datetime="2021-01-31T16:42:39+08:00">2021-01-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yoro/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>回归模型：输入数据得到数据</p>
+<p>应用：Stock Market Forecast股票预测，Self-driving Car无人车驾驶，Recommendation推荐系统（淘宝，亚马逊）</p>
+<a id="more"></a>
+
+<h1 id="Linear-Model线性模型"><a href="#Linear-Model线性模型" class="headerlink" title="Linear Model线性模型"></a>Linear Model线性模型</h1><h2 id="建模过程"><a href="#建模过程" class="headerlink" title="建模过程"></a>建模过程</h2><ul>
+<li><p>Step 1：Model</p>
+<p>确定模型的输入个数（属性x个数）和种类，线性模型的形式（各个参数对应的次数），以此确定一个A set of function函数集合（因为待测系数未确定，所以这个set中的元素是无限的）；</p>
+<p>假设下列描述的模型为（<em>w为待测参数，即输入x的对模型影响的权重，b为模型偏差，bias</em>）：<br>$$<br>y=b+w*x_{cp}<br>$$</p>
+</li>
+<li><p>Step 2：Goodness of Function 模型评估</p>
+<p>Loss function损失函数：可用Estimation error（估测误差）来定义，一个数据的Estimation error为<br>$$<br>(\hat{y}^n-f(x^n_{cp}))^2<br>$$<br>对于一个只有一个输入的线性模型损失函数可以定义为下，x的下表为输入数据类型，上标对应在Training data的序号：<br>$$<br>L(f)=\sum_{n=1}^{N} {(\hat{y}^n-f(x^n_{cp}))^2}<br>$$</p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129141916.png" style="zoom:80%;" />
+
+<p>对只有一个输入参数一次function，线性模型有两个待测系数w、b，用类似等高线的图来评价function的选择好坏，蓝色代表损失函数的输出越小，function越优。</p>
+<p>用training date来确定parameters，用testing date来评估parameters（通过Average Error的数值）</p>
+<p>用loss function从a set of function中选择最好的function<br>$$<br>f^<em>=arg min L(f)\w^</em>,b^*=argminL(w,b)<br>$$</p>
+<blockquote>
+<p>arg   是变元（即自变量argument）的英文缩写。<br>arg min 就是使后面这个式子达到最小值时的变量的取值</p>
+<p>arg max 就是使后面这个式子达到最大值时的变量的取值</p>
+<p>例如 函数F(x,y):</p>
+<p>arg  min F(x,y)就是指当F(x,y)取得最小值时，变量x,y的取值</p>
+<p>arg  max F(x,y)就是指当F(x,y)取得最大值时，变量x,y的取值</p>
+</blockquote>
+</li>
+<li><p>Step 3：Best Function</p>
+<p>使用<strong>Gradient Descent梯度下降</strong>的方式来解线性模型，就是求导（或求偏导）；</p>
+<ul>
+<li><p>对于一次的线性模型：</p>
+<p>只对参数w检测时，在Loss function中对其求导，如果<strong>值为负则增加，值为正则减少</strong></p>
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129143627.png" alt=""></p>
+<p>初始值w随机选取，更新参数的大小与导数和learning rate（学习率，提前拟定的，我理解为迭代步长）有关，不断iteration（迭代）得到局部最优Local optimal（有时不一定是全局最优not global optimal），<strong>但是Linear Regression没有local optimal</strong></p>
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129144107.png" alt=""></p>
+</li>
+<li><p>对于两个参数的Model</p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129144144.png" style="zoom: 67%;" />
+
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129144201.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Model-Selection-模型选择"><a href="#Model-Selection-模型选择" class="headerlink" title="Model Selection 模型选择"></a>Model Selection 模型选择</h2><p>在模型的选择中，如果次数越高，那么对Training data的效果会越好（误差越低）；</p>
+<p>但是对Testing data则不一定会展现良好的效果（次数增加误差变大）；</p>
+<p>因为在用训练数据来确定参数时，多次幂的Model包含了低次幂的Model（如下图）。</p>
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/Snipaste_2021-01-29_13-51-31.png" alt=""></p>
+<p>如果次数过高就会次数<strong>过拟合（OVerfitting）</strong>现象：模型在Training data上表现良好（次数越高往往可以得到很高的Training Error），但是在Testing data中可能会表现的非常糟糕，如下图：</p>
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129145318.png" alt=""></p>
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129135928.png" alt=""></p>
+<p>需要检测每一个模型的效果（Avarage Error）：即先确定不同的function set，再对每个set挑选出最优（参数）的funtion，再比较各个Model的function哪个的Error更小。</p>
+<p><strong>对于Model次数的确定，一半通过其在Training data中的曲线效果和Error来决定（个人认为如果某个次数的Model出现过拟合现象就不应再提升次数了）</strong>。</p>
+<p>即可得到最优的Model和对应的Function。</p>
+<h3 id="PS：不同种类输入的模型选择"><a href="#PS：不同种类输入的模型选择" class="headerlink" title="PS：不同种类输入的模型选择"></a>PS：不同种类输入的模型选择</h3><p>如果得到的Model曲线和数据点还有偏差，则可能是有一些隐含的参数未被考虑。</p>
+<p>影响Model的因素有很多，可能是不同的环境，不同的种类等等，需要考虑周全；</p>
+<ul>
+<li><strong>对于不同条件下（输入参数的类型不同），可以使用下列方法</strong>：</li>
+</ul>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/IMG_8871(20210129-150004).JPG" style="zoom:67%;" />
+
+<p>根据不同的<strong>条件</strong>来选择不同的w，b来得到输出值，可以应用于数据局部分布规律的情况，如下：</p>
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129150515.png" alt=""></p>
+<h3 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h3><p>当影响因数未知的时候（或者Model并没有完全与Training data重合），往往会考虑尽可能多的影响因数，即添加很多的输入x，求很多的参数w，往往此时可以得到很低的Training Error，但是Testing Error很可能会爆炸，甚至出现过拟合现象。</p>
+<p>此时就应该修改损失函数：</p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129151704.png" style="zoom:67%;" />
+
+<p><strong>为了防止Model复杂时Testing Error爆炸，往往使w的值偏小，因为w越小当x的值变动是△x时，对function输出的影响w*△x越小，函数越平滑。李宏毅老师给出的一个解释：期待一个参数值接近0的function，参数值越接近0，function曲线越平滑，当输入数据被杂讯干扰时输入，函数对不敏感，即输入对输出的影响越小，不易被杂讯干扰，可以得到一个好的结果。</strong></p>
+<p>λ是手动调节的，<em>λ越大上述损失函数的后部分权重越高，函数越*</em>平*<em>滑；λ越小，越偏向考虑误差。</em>所以对一组数据的测试可以得到如下结果，λ越大Training Error一定越大，所以对于误差和曲线平滑程度要综合考虑：</p>
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129152858.png" alt=""></p>
+<p><strong>做Regularization时不用考虑bias，因为bias不会影响曲线的平滑程度！！！</strong></p>
+<h2 id="模型误差"><a href="#模型误差" class="headerlink" title="模型误差"></a>模型误差</h2><blockquote>
+<p>误差来源：<strong>mean（平均数）     或variance（均值）</strong></p>
+<p>搞清楚误差的来源是优化模型的关键！</p>
+</blockquote>
+<p>如果假设目标函数是target，mean代表着和 target的距离（bias代表mean和target的偏差），而variance代表着测试funtion值的离散程度，如下图所示</p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129222819.png" style="zoom:50%;" />
+
+
+
+
+
+<p>次数越高bias越小（与数据点越来越接近，各个function的值和平均值越接近，function的形状近似）但是variance增大（function包括的范围增大，对不同数据集得到function的形状偏差变大）</p>
+<p>如果次数过小时，可能function set中不包含正确的function（不包含target），出现underfitting现象；如果次数过低，可能从Training data中得到的function，在其他data中会呈现不好的效果，因为次数越高不同数据集得到的function图像越不相似，产生Overfitting。</p>
+<p>如下两图所示：</p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129223320.png" style="zoom:80%;" />
+
+<p>蓝线即同时被考虑                                                    </p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210129220540.png" style="zoom:80%;" />
+
+<h3 id="如何判端和处理bias和variance"><a href="#如何判端和处理bias和variance" class="headerlink" title="如何判端和处理bias和variance"></a>如何判端和处理bias和variance</h3><p><em>如果一条曲线在Training data中很少穿过数据点，则可以判端其bias过大；如果一个function的曲线，可以在一个数据集中可以和较多的数据点吻合，但是在另一个数据集中表现较差则体现为variance过大。</em>（我感觉还是得需要更多的数据来评估😂）</p>
+<ul>
+<li>对于bias过大的情形，可能是目标函数不在初始定义的函数集合中，解决方法：<ul>
+<li>考虑更多的因数，Add more features as input</li>
+<li>设计次数更高的函数，A more complex model</li>
+</ul>
+</li>
+<li>对于variance：<ul>
+<li>增加更多测试数据 More data，是一个非常有效的方法，但是实际中可能很难过的更多的data</li>
+<li>Regularization</li>
+</ul>
+</li>
+</ul>
+<p><strong>选择Model需要追求bias和variance之间的平衡！</strong></p>
+<h2 id="Model筛选注意点"><a href="#Model筛选注意点" class="headerlink" title="Model筛选注意点"></a>Model筛选注意点</h2><p><strong>值得注意的是往往从training set中筛选出的最优的结果，放到testing set中也许效果并不理想（training set和testing set的在自己手中，real set是实际使用时产生的，未知），此时如果调整筛选出的结果使其符合testing set，则可能导致其在real set中的使用效果变差！就是说不可以根据Testing data去调整参数，它不一定会导致好的结果</strong></p>
+<h3 id="N-fold-Cross-Validation"><a href="#N-fold-Cross-Validation" class="headerlink" title="N-fold Cross Validation"></a>N-fold Cross Validation</h3><p>n折交叉检验，来筛选model，因为往往不通过testing set来优化和筛选model，所以可以将training set分为n份，每次拿其中一份做validation，其他做train，然后下次实验更换validation，筛选average error最小的来做最终的model  //validation验证</p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/Snipaste_2021-01-24_16-34-40.png" style="zoom:67%;" />
+
+<h1 id="老师的demo"><a href="#老师的demo" class="headerlink" title="老师的demo"></a>老师的demo</h1><p>先做出所有取值下的loss function值，再以其为等高线作图，判端Gradient Descent的效果（他算Loss function时，取了均值，取不取好像不影响等高线背景）</p>
+<ul>
+<li><p><code>plt.contourf(x,y,Z,50,alpha=0.5,cmap=plt.get_cmap(&#39;jet&#39;))</code> <a href="https://blog.csdn.net/lens___/article/details/83960810">绘制高线函数</a>：画等高线的函数，将三维映射到二维平面，用颜色来代表z的大小，alpha是透明度0-1之间取值，cmap=plt.get_cmap(‘jet’)是等高线对应不同数值的渐变程度，‘jet’是对应渐变颜色。<a href="https://blog.csdn.net/lly1122334/article/details/88535217">cmap色彩图</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/codedz/article/details/82869370">numpy库</a>完成基础计算，获得均匀分布，高斯（正态）分布等。</p>
+<blockquote>
+<p>arange(a,b,c) 参数分别表示开始值，结束值，步长</p>
+<ul>
+<li>zeros数组：全零数组，元素全为零。</li>
+<li>ones数组：全1数组，元素全为1。</li>
+<li>empty数组：空数组，元素全近似为0。</li>
+</ul>
+</blockquote>
+</li>
+<li><p><a href="https://blog.csdn.net/majinlei121/article/details/83994935">plt绘图</a></p>
+<blockquote>
+<p>注意matplotlib.use(‘agg’)必须在本句执行import matplotlib.pyplot as plt前运行</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 假设x_data和y_data都有10笔，分别代表宝可梦进化前后的cp值</span></span><br><span class="line">x_data=[<span class="number">338.</span>,<span class="number">333.</span>,<span class="number">328.</span>,<span class="number">207.</span>,<span class="number">226.</span>,<span class="number">25.</span>,<span class="number">179.</span>,<span class="number">60.</span>,<span class="number">208.</span>,<span class="number">606.</span>]</span><br><span class="line">y_data=[<span class="number">640.</span>,<span class="number">633.</span>,<span class="number">619.</span>,<span class="number">393.</span>,<span class="number">428.</span>,<span class="number">27.</span>,<span class="number">193.</span>,<span class="number">66.</span>,<span class="number">226.</span>,<span class="number">1591.</span>]</span><br><span class="line"><span class="comment"># 这里采用最简单的linear model：y_data=b+w*x_data</span></span><br><span class="line"><span class="comment"># 我们要用gradient descent把b和w找出来</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">matplotlib.use(<span class="string">'Agg'</span>)</span><br><span class="line"><span class="comment">#%matplotlib inline </span></span><br><span class="line"><span class="keyword">import</span> random <span class="keyword">as</span> random</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> csv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算梯度微分的函数getGrad()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getGrad</span><span class="params">(b,w)</span>:</span></span><br><span class="line">    <span class="comment"># initial b_grad and w_grad</span></span><br><span class="line">    b_grad=<span class="number">0.0</span></span><br><span class="line">    w_grad=<span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        b_grad+=(<span class="number">-2.0</span>)*(y_data[i]-(b+w*x_data[i]))</span><br><span class="line">        w_grad+=(<span class="number">-2.0</span>*x_data[i])*(y_data[i]-(b+w*x_data[i]))</span><br><span class="line">    <span class="keyword">return</span> (b_grad,w_grad)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成一组b和w的数据图，方便给gradient descent的过程做标记</span></span><br><span class="line">x = np.arange(<span class="number">-200</span>,<span class="number">-100</span>,<span class="number">1</span>) <span class="comment"># bias</span></span><br><span class="line">y = np.arange(<span class="number">-5</span>,<span class="number">5</span>,<span class="number">0.1</span>) <span class="comment"># weight</span></span><br><span class="line">Z = np.zeros((len(x),len(y))) <span class="comment"># color</span></span><br><span class="line">X,Y = np.meshgrid(x,y)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(x)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(y)):</span><br><span class="line">        b = x[i]</span><br><span class="line">        w = y[j]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Z[j][i]存储的是loss</span></span><br><span class="line">        Z[j][i] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> range(len(x_data)):</span><br><span class="line">            Z[j][i] = Z[j][i] + (y_data[n] - (b + w * x_data[n]))**<span class="number">2</span></span><br><span class="line">        Z[j][i] = Z[j][i]/len(x_data)</span><br><span class="line">        </span><br><span class="line"><span class="comment"># y_data = b + w * x_data</span></span><br><span class="line">b = <span class="number">-120</span> <span class="comment"># initial b</span></span><br><span class="line">w = <span class="number">-4</span> <span class="comment"># initial w</span></span><br><span class="line">lr = <span class="number">0.0000001</span> <span class="comment"># learning rate</span></span><br><span class="line">iteration = <span class="number">100000</span> <span class="comment"># 这里直接规定了迭代次数，而不是一直运行到b_grad和w_grad都为0(事实证明这样做不太可行)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># store initial values for plotting，我们想要最终把数据描绘在图上，因此存储过程数据</span></span><br><span class="line">b_history = [b]</span><br><span class="line">w_history = [w]</span><br><span class="line"></span><br><span class="line"><span class="comment"># iterations</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(iteration):</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># get new b_grad and w_grad</span></span><br><span class="line">    b_grad,w_grad=getGrad(b,w)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># update b and w</span></span><br><span class="line">    b -= lr * b_grad</span><br><span class="line">    w -= lr * w_grad</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#store parameters for plotting</span></span><br><span class="line">    b_history.append(b)</span><br><span class="line">    w_history.append(w)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot the figure</span></span><br><span class="line">plt.contourf(x,y,Z,<span class="number">50</span>,alpha=<span class="number">0.5</span>,cmap=plt.get_cmap(<span class="string">'jet'</span>))</span><br><span class="line">plt.plot([<span class="number">-188.4</span>],[<span class="number">2.67</span>],<span class="string">'x'</span>,ms=<span class="number">12</span>,markeredgewidth=<span class="number">3</span>,color=<span class="string">'orange'</span>)</span><br><span class="line">plt.plot(b_history,w_history,<span class="string">'o-'</span>,ms=<span class="number">3</span>,lw=<span class="number">1.5</span>,color=<span class="string">'black'</span>)</span><br><span class="line">plt.xlim(<span class="number">-200</span>,<span class="number">-100</span>)</span><br><span class="line">plt.ylim(<span class="number">-5</span>,<span class="number">5</span>)</span><br><span class="line">plt.xlabel(<span class="string">r'$b$'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.ylabel(<span class="string">r'$w$'</span>,fontsize=<span class="number">16</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>learning rate=0.0000001时，离最佳点还很远</p>
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210131145137.png" alt=""></p>
+</li>
+<li><p>learning rate=0.000001时，扩大10倍，效果变好，但是距离最佳点还是很远，而且有一个震荡</p>
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210131145335.png" alt=""></p>
+</li>
+<li><p>learning rate= 0.00001，再扩大10倍，结果坏掉了</p>
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210131145430.png" alt=""></p>
+</li>
+<li><p>使用Adafrad后：learing rate=1，代码改为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># y_data = b + w * x_data</span></span><br><span class="line">b = <span class="number">-120</span> <span class="comment"># initial b</span></span><br><span class="line">w = <span class="number">-4</span> <span class="comment"># initial w</span></span><br><span class="line">lr = <span class="number">1</span> <span class="comment"># learning rate</span></span><br><span class="line">iteration = <span class="number">100000</span> <span class="comment"># 这里直接规定了迭代次数，而不是一直运行到b_grad和w_grad都为0(事实证明这样做不太可行)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># store initial values for plotting，我们想要最终把数据描绘在图上，因此存储过程数据</span></span><br><span class="line">b_history = [b]</span><br><span class="line">w_history = [w]</span><br><span class="line"></span><br><span class="line">lr_b=<span class="number">0</span></span><br><span class="line">lr_w=<span class="number">0</span></span><br><span class="line"><span class="comment"># iterations</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getGrad_2</span><span class="params">(b,w)</span>:</span></span><br><span class="line">    <span class="comment"># initial b_grad and w_grad</span></span><br><span class="line">    <span class="keyword">global</span> lr_b  <span class="comment"># 使用全局变量</span></span><br><span class="line">    <span class="keyword">global</span> lr_w</span><br><span class="line">    b_grad=<span class="number">0.0</span></span><br><span class="line">    w_grad=<span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">        b_grad+=(<span class="number">-2.0</span>)*(y_data[i]-(b+w*x_data[i]))</span><br><span class="line">        w_grad+=(<span class="number">-2.0</span>*x_data[i])*(y_data[i]-(b+w*x_data[i]))</span><br><span class="line">    lr_b=lr_b+b_grad**<span class="number">2</span></span><br><span class="line">    lr_w=lr_w+w_grad**<span class="number">2</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (b_grad,w_grad)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(iteration):</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># get new b_grad and w_grad</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#b_grad,w_grad=getGrad(b,w)</span></span><br><span class="line">    <span class="comment"># upgrade</span></span><br><span class="line">    b_grad,w_grad=getGrad_2(b,w)    </span><br><span class="line"></span><br><span class="line">    <span class="comment"># update b and w</span></span><br><span class="line">    b -= lr/np.sqrt(lr_b) * b_grad</span><br><span class="line">  w -= lr/np.sqrt(lr_w) * w_grad</span><br><span class="line">    </span><br><span class="line">  <span class="comment">#store parameters for plotting</span></span><br><span class="line">    b_history.append(b)</span><br><span class="line">    w_history.append(w)</span><br></pre></td></tr></table></figure>
+
+<p>效果明显很好</p>
+<p><img src="C:%5CUsers%5C14117%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210131150446238.png" alt="image-20210131150446238"></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+	<div>
+	  
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+	</div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>YoRo
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoro99.gitee.io/yoro/2021/01/24/ml-1/" title="ML_0x01 Regression">http://yoro99.gitee.io/yoro/2021/01/24/ml-1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/yoro/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"> <i class="fa fa-tag"></i> # 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/yoro/2021/01/23/ml-0/" rel="prev" title="ML_0x00">
+      <i class="fa fa-chevron-left"></i> ML_0x00
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/yoro/2021/01/30/ml-2/" rel="next" title="ML_0x02 Gradient Descent">
+      ML_0x02 Gradient Descent <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+		
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linear-Model线性模型"><span class="nav-number">1.</span> <span class="nav-text">Linear Model线性模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建模过程"><span class="nav-number">1.1.</span> <span class="nav-text">建模过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Selection-模型选择"><span class="nav-number">1.2.</span> <span class="nav-text">Model Selection 模型选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PS：不同种类输入的模型选择"><span class="nav-number">1.2.1.</span> <span class="nav-text">PS：不同种类输入的模型选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Regularization"><span class="nav-number">1.2.2.</span> <span class="nav-text">Regularization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型误差"><span class="nav-number">1.3.</span> <span class="nav-text">模型误差</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何判端和处理bias和variance"><span class="nav-number">1.3.1.</span> <span class="nav-text">如何判端和处理bias和variance</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model筛选注意点"><span class="nav-number">1.4.</span> <span class="nav-text">Model筛选注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#N-fold-Cross-Validation"><span class="nav-number">1.4.1.</span> <span class="nav-text">N-fold Cross Validation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#老师的demo"><span class="nav-number">2.</span> <span class="nav-text">老师的demo</span></a></li></ol></div>
+      </div>
+	  
+	
+
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="YoRo"
+      src="/yoro/images/author.jpg">
+  <p class="site-author-name" itemprop="name">YoRo</p>
+  <div class="site-description" itemprop="description">一点浩然气，千里快哉风</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/yoro/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/yoro/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/yoro/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/birdYoRo" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;birdYoRo" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1411715797@qq.com" title="E-Mail → mailto:1411715797@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/yw2018" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;yw2018" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/yoro/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YoRo</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">276k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4:11</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='150' src="/yoro/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/yoro/lib/anime.min.js"></script>
+  <script src="/yoro/lib/velocity/velocity.min.js"></script>
+  <script src="/yoro/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/yoro/js/utils.js"></script>
+
+<script src="/yoro/js/motion.js"></script>
+
+
+<script src="/yoro/js/schemes/pisces.js"></script>
+
+
+<script src="/yoro/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+   <!-- 页面点击小红心 -->
+   
+  
+
+</body>
+</html>

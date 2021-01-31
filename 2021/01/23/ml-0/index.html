@@ -46,16 +46,17 @@
   };
 </script>
 
-  <meta name="description" content="很迷。。。安装环境安装了很久">
+  <meta name="description" content="很迷。。。安装环境安装了很久 感觉不用按视频助教的建议装pyenv，直接用Anaconda就可以，包依赖什么的都有现成的 一开始先卸去年装的Anaconda，然后又装错了装成Anaconda2，再装了一遍又错了，Anaconda3的版本没对，算了，感觉无伤大雅emmm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ML_0x00">
 <meta property="og:url" content="http://yoro99.gitee.io/yoro/2021/01/23/ml-0/index.html">
 <meta property="og:site_name" content="YoRo99のblog">
-<meta property="og:description" content="很迷。。。安装环境安装了很久">
+<meta property="og:description" content="很迷。。。安装环境安装了很久 感觉不用按视频助教的建议装pyenv，直接用Anaconda就可以，包依赖什么的都有现成的 一开始先卸去年装的Anaconda，然后又装错了装成Anaconda2，再装了一遍又错了，Anaconda3的版本没对，算了，感觉无伤大雅emmm">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/Snipaste_2021-01-23_19-30-58.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/1556945-20190528231455478-1066912885.png">
 <meta property="article:published_time" content="2021-01-23T11:32:18.000Z">
-<meta property="article:modified_time" content="2021-01-23T11:33:38.264Z">
+<meta property="article:modified_time" content="2021-01-27T15:57:02.305Z">
 <meta property="article:author" content="YoRo">
 <meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
@@ -159,7 +160,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/yoro/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">41</span></a>
+    <a href="/yoro/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">44</span></a>
 
   </li>
   </ul>
@@ -210,10 +211,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-01-23 19:32:18 / 修改时间：19:33:38" itemprop="dateCreated datePublished" datetime="2021-01-23T19:32:18+08:00">2021-01-23</time>
+              <time title="创建时间：2021-01-23 19:32:18" itemprop="dateCreated datePublished" datetime="2021-01-23T19:32:18+08:00">2021-01-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-27 23:57:02" itemprop="dateModified" datetime="2021-01-27T23:57:02+08:00">2021-01-27</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -232,14 +239,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -253,6 +260,8 @@
       
         <blockquote>
 <p>很迷。。。安装环境安装了很久</p>
+<p>感觉不用按视频助教的建议装pyenv，直接用Anaconda就可以，包依赖什么的都有现成的</p>
+<p>一开始先卸去年装的Anaconda，然后又装错了装成Anaconda2，再装了一遍又错了，Anaconda3的版本没对，算了，感觉无伤大雅emmm</p>
 </blockquote>
 <a id="more"></a>
 
@@ -290,6 +299,7 @@
 <p>Meta Learning = Learn to learn</p>
 <p>Life-long Learning 终身学习</p>
 <h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p><a href="http://mirrors.163.com/">可以下载ubuntu,centos.mysql的镜像网站</a></p>
+<p>清华的镜像网站（有anaconda）：<a href="https://mirrors.tuna.tsinghua.edu.cn/">https://mirrors.tuna.tsinghua.edu.cn/</a></p>
 <p>ubuntu 18.04+pyenv+Python 3.6.8</p>
 <p>先安装git</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git</span><br></pre></td></tr></table></figure>
@@ -330,12 +340,22 @@
 <blockquote>
 <p><a href="https://blog.csdn.net/l1216766050/article/details/77526455">pyenv使用国内镜像下载的方法，但是镜像网站里我没找到python只找到anaconda</a></p>
 </blockquote>
-<h1 id="Linux-相关命令"><a href="#Linux-相关命令" class="headerlink" title="Linux 相关命令"></a>Linux 相关命令</h1><h2 id="ubuntu删除空文件夹"><a href="#ubuntu删除空文件夹" class="headerlink" title="ubuntu删除空文件夹"></a>ubuntu删除空文件夹</h2><ul>
-<li>rmdir 目录名</li>
+<h1 id="Linux-相关命令"><a href="#Linux-相关命令" class="headerlink" title="Linux 相关命令"></a>Linux 相关命令</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ubuntu删除空文件夹</span></span><br><span class="line">- rmdir 目录名</span><br><span class="line"><span class="meta">#</span><span class="bash"> ubuntu删除非空文件夹</span></span><br><span class="line">- rm -rf 目录名</span><br><span class="line">  参数-f表示force,用了这个参数就不会询问你是否要删除了。</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">文本编辑</span></span><br><span class="line">gedit filename</span><br><span class="line">sudo gedit filename #如果开启后不能编辑</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">下载从网站上下载文件</span></span><br><span class="line">wget url</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">创建软连接，sypder在ubuntu中创建快捷方式失败了emmm，然后创建一个软连接算了</span></span><br><span class="line">ln -s 原目录 映射目录</span><br><span class="line">ln -s 原目录 #映射到当前目录</span><br></pre></td></tr></table></figure>
+
+<h2 id="anaconda3安装"><a href="#anaconda3安装" class="headerlink" title="anaconda3安装"></a>anaconda3安装</h2><ul>
+<li><p>ubuntu中 执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-4.4.0-Linux-x86_64.sh</span><br><span class="line">bash Anaconda3-4.4.0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>windows直接在镜像网站下载<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/</a></p>
+</li>
 </ul>
-<h2 id="ubuntu删除非空文件夹"><a href="#ubuntu删除非空文件夹" class="headerlink" title="ubuntu删除非空文件夹"></a>ubuntu删除非空文件夹</h2><ul>
-<li>rm -rf 目录名<br>参数-f表示force,用了这个参数就不会询问你是否要删除了。</li>
-</ul>
+<blockquote>
+<p><a href="https://blog.csdn.net/qq_15192373/article/details/81091098">安装方法</a></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改环境变量PATH</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装anaconda3后的配置</span></span><br><span class="line"></span><br><span class="line">sudo gedit ~/.bashrc</span><br><span class="line">export PATH="/home/xupp/anaconda3/bin:$PATH"</span><br><span class="line">source ~/.bashrc</span><br><span class="line"><span class="meta">#</span><span class="bash">每次修改.bashrc后，使用<span class="built_in">source</span> ~/.bashrc（或者 . ~/.bashrc）就可以立刻加载修改后的设置，使之生效。</span></span><br></pre></td></tr></table></figure>
+
+<p>如果是 3.6.8的python应该装Anaconda3-5.2.0吧</p>
+<h3 id="Anaconda与Python的对应表"><a href="#Anaconda与Python的对应表" class="headerlink" title="Anaconda与Python的对应表"></a>Anaconda与Python的对应表</h3><p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/1556945-20190528231455478-1066912885.png" alt=""></p>
 
     </div>
 
@@ -384,7 +404,10 @@
     <a href="/yoro/2021/01/16/2021-1/" rel="prev" title="2021_0x01">
       <i class="fa fa-chevron-left"></i> 2021_0x01
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/yoro/2021/01/24/ml-1/" rel="next" title="ML_0x01 Regression">
+      ML_0x01 Regression <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -444,7 +467,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#有关pyenv"><span class="nav-number">2.1.</span> <span class="nav-text">有关pyenv</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-相关命令"><span class="nav-number">3.</span> <span class="nav-text">Linux 相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ubuntu删除空文件夹"><span class="nav-number">3.1.</span> <span class="nav-text">ubuntu删除空文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ubuntu删除非空文件夹"><span class="nav-number">3.2.</span> <span class="nav-text">ubuntu删除非空文件夹</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#有关pyenv"><span class="nav-number">2.1.</span> <span class="nav-text">有关pyenv</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-相关命令"><span class="nav-number">3.</span> <span class="nav-text">Linux 相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#anaconda3安装"><span class="nav-number">3.1.</span> <span class="nav-text">anaconda3安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Anaconda与Python的对应表"><span class="nav-number">3.1.1.</span> <span class="nav-text">Anaconda与Python的对应表</span></a></li></ol></li></ol></li></ol></div>
       </div>
 	  
 	
@@ -463,7 +486,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/yoro/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -524,12 +547,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">256k</span>
+    <span title="站点总字数">276k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:52</span>
+    <span title="站点阅读时长">4:11</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动
   </div>

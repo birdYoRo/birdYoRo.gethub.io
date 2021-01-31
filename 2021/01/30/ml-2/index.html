@@ -46,17 +46,23 @@
   };
 </script>
 
-  <meta name="description" content="一点浩然气，千里快哉风">
-<meta property="og:type" content="website">
-<meta property="og:title" content="YoRo99のblog">
-<meta property="og:url" content="http://yoro99.gitee.io/yoro/archives/2020/04/index.html">
+  <meta name="description" content="在Regression中定义Loss function（损失函数）来评价一个function是否合适时，通过Gradient Descent（梯度下降）来调整损失函数的参数，进行迭代，以得到更优秀的function   这节课是在Gradient Descent中的技巧和方法。 这星期没来的及写。。。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ML_0x02 Gradient Descent">
+<meta property="og:url" content="http://yoro99.gitee.io/yoro/2021/01/30/ml-2/index.html">
 <meta property="og:site_name" content="YoRo99のblog">
-<meta property="og:description" content="一点浩然气，千里快哉风">
+<meta property="og:description" content="在Regression中定义Loss function（损失函数）来评价一个function是否合适时，通过Gradient Descent（梯度下降）来调整损失函数的参数，进行迭代，以得到更优秀的function   这节课是在Gradient Descent中的技巧和方法。 这星期没来的及写。。。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210130191540.png">
+<meta property="og:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210130192122.png">
+<meta property="article:published_time" content="2021-01-30T06:08:40.000Z">
+<meta property="article:modified_time" content="2021-01-31T14:06:13.851Z">
 <meta property="article:author" content="YoRo">
+<meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210130191540.png">
 
-<link rel="canonical" href="http://yoro99.gitee.io/yoro/archives/2020/04/">
+<link rel="canonical" href="http://yoro99.gitee.io/yoro/2021/01/30/ml-2/">
 
 
 <script id="page-configurations">
@@ -64,11 +70,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: false
+    isPost: true
   };
 </script>
 
-  <title>归档 | YoRo99のblog</title>
+  <title>ML_0x02 Gradient Descent | YoRo99のblog</title>
   
 
 
@@ -178,250 +184,151 @@
           <div class="content">
             
 
+  <div class="posts-expand">
+      
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        
-        <span class="collection-header">还行! 目前共计 44 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoro99.gitee.io/yoro/2021/01/30/ml-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/yoro/images/author.jpg">
+      <meta itemprop="name" content="YoRo">
+      <meta itemprop="description" content="一点浩然气，千里快哉风">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YoRo99のblog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ML_0x02 Gradient Descent
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-30 14:08:40" itemprop="dateCreated datePublished" datetime="2021-01-30T14:08:40+08:00">2021-01-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-31 22:06:13" itemprop="dateModified" datetime="2021-01-31T22:06:13+08:00">2021-01-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/yoro/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>408</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <h1 class="collection-header">2020</h1>
-    </div>
+        <p>在Regression中定义Loss function（损失函数）来评价一个function是否合适时，通过Gradient Descent（梯度下降）来调整损失函数的参数，进行迭代，以得到更优秀的function</p>
+<img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210130191540.png" style="zoom:67%;" />
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>这节课是在Gradient Descent中的技巧和方法。</p>
+<p>这星期没来的及写。。。</p>
+<a id="more"></a>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-28T10:51:18+08:00"
-              content="2020-04-28">
-          04-28
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/yoro/2020/04/28/os-6/" itemprop="url">
-            <span itemprop="name">各种调度算法</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-28T10:47:05+08:00"
-              content="2020-04-28">
-          04-28
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/yoro/2020/04/28/os-5/" itemprop="url">
-            <span itemprop="name">操作系统0x05</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-28T10:46:55+08:00"
-              content="2020-04-28">
-          04-28
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/yoro/2020/04/28/pat-2020-7/" itemprop="url">
-            <span itemprop="name">PAT周练习0x07 1067-1080</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-28T10:46:27+08:00"
-              content="2020-04-28">
-          04-28
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/yoro/2020/04/28/treechange/" itemprop="url">
-            <span itemprop="name">层序中序还原树</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-21T20:19:32+08:00"
-              content="2020-04-21">
-          04-21
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/yoro/2020/04/21/os-4/" itemprop="url">
-            <span itemprop="name">操作系统0x04</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-21T12:00:04+08:00"
-              content="2020-04-21">
-          04-21
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/yoro/2020/04/21/pat-2020-6/" itemprop="url">
-            <span itemprop="name">PAT周练习0x06 1081-1090</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-13T12:29:58+08:00"
-              content="2020-04-13">
-          04-13
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/yoro/2020/04/13/pat-2020-5/" itemprop="url">
-            <span itemprop="name">PAT周练习0x05 1091-1100</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-10T18:14:39+08:00"
-              content="2020-04-10">
-          04-10
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/yoro/2020/04/10/graph/" itemprop="url">
-            <span itemprop="name">基础图论</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-06T13:38:23+08:00"
-              content="2020-04-06">
-          04-06
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/yoro/2020/04/06/pat-2020-4/" itemprop="url">
-            <span itemprop="name">PAT周练习0x04 1101-1116</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-05T14:21:00+08:00"
-              content="2020-04-05">
-          04-05
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/yoro/2020/04/05/sd-1/" itemprop="url">
-            <span itemprop="name">AVL&KMP&线索二叉树&矩阵转置</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-05T14:16:59+08:00"
-              content="2020-04-05">
-          04-05
-        </time>
-      </div>
-
-      <h2 class="post-title">
-          <a class="post-title-link" href="/yoro/2020/04/05/life-2020-4/" itemprop="url">
-            <span itemprop="name">2020_0x04</span>
-          </a>
-      </h2>
-
-    </header>
-  </article>
-
+<h1 id="Tip-1：Tuning-your-learning-rates"><a href="#Tip-1：Tuning-your-learning-rates" class="headerlink" title="Tip 1：Tuning your learning rates"></a>Tip 1：Tuning your learning rates</h1><p>通过设置learning rate可以控制每次迭代的步长。但是如果learning rate设置的太小那么程序的性能就会下降，其趋近于target的速度会比较；如  果learning rate控制的偏大，那么可能迭代无法靠近target，而在target两侧摆动；如果learning rate过大，那么可能导致更新后的点距离target的目标反而变远，下图可以直观反映出这些情况：</p>
+<p><img src="https://mdgraph-1301162508.cos.ap-shanghai.myqcloud.com/20210130192122.png" alt=""></p>
+<h1 id="Tip-2：Stochastic-Gradient-Descent"><a href="#Tip-2：Stochastic-Gradient-Descent" class="headerlink" title="Tip 2：Stochastic Gradient Descent"></a>Tip 2：Stochastic Gradient Descent</h1><h1 id="Tip-3：Feature-Scaling"><a href="#Tip-3：Feature-Scaling" class="headerlink" title="Tip 3：Feature Scaling"></a>Tip 3：Feature Scaling</h1><p>​                                                 </p>
 
     </div>
+
+    
+    
+    
+	<div>
+	  
+       <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+	</div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>YoRo
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoro99.gitee.io/yoro/2021/01/30/ml-2/" title="ML_0x02 Gradient Descent">http://yoro99.gitee.io/yoro/2021/01/30/ml-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/yoro/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"> <i class="fa fa-tag"></i> # 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/yoro/2021/01/24/ml-1/" rel="prev" title="ML_0x01 Regression">
+      <i class="fa fa-chevron-left"></i> ML_0x01 Regression
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/yoro/2021/01/31/mlhomework1/" rel="next" title="ML_作业一">
+      ML_作业一 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
   </div>
-  
-  
-  
-
-  
-
 
 
           </div>
@@ -472,6 +379,7 @@
 		
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tip-1：Tuning-your-learning-rates"><span class="nav-number">1.</span> <span class="nav-text">Tip 1：Tuning your learning rates</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tip-2：Stochastic-Gradient-Descent"><span class="nav-number">2.</span> <span class="nav-text">Tip 2：Stochastic Gradient Descent</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tip-3：Feature-Scaling"><span class="nav-number">3.</span> <span class="nav-text">Tip 3：Feature Scaling</span></a></li></ol></div>
       </div>
 	  
 	
